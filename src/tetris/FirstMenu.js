@@ -1,7 +1,7 @@
 import React, {useRef, useState} from 'react';
 import './Tetris.css';
 
-function FirstMenu({menuHide = false, onSelect, level = []}){
+function FirstMenu({onSelect, level = []}){
     const [text1, setText1] = useState("start");
     const [cls, setCls] = useState("label1");
     const [isClicked, setIsClicked] = useState(false);
@@ -18,7 +18,7 @@ function FirstMenu({menuHide = false, onSelect, level = []}){
             const r2 = Math.random() * 1000 % 256;
             const r3 = Math.random() * 1000 % 256;
             divRef.current.style.color = `rgb(${r1}, ${r2}, ${r3})`;
-        },500);
+        },600);
     };
 
     const clickLevel = (e)=>{
@@ -28,7 +28,7 @@ function FirstMenu({menuHide = false, onSelect, level = []}){
 
     return(
         <>
-            <div className="menu-box" hidden={menuHide}>
+            <div className="menu-box">
                 <div className="title">TETRIS</div>
                 <div className={cls} onClick={clickStart} ref={divRef}>{text1}</div>
                 <div className="level-box">{level.map((val, idx)=>{

@@ -13,12 +13,13 @@
     font-weight: bold;
 }
 .label1 {
+    color: white !important;
     font-size: 40px;
     font-weight: bold;
     margin: 200px auto 0px auto;
     width: 200px;
     height:50px;
-    border: 2px solid;
+    border: 2px solid white;
     border-radius: 10px;
     line-height: 40px;
     background-color: black;
@@ -87,6 +88,8 @@
     border: 5px solid rgb(255, 143, 14);
     border-radius: 4px;
     margin: auto;
+    filter: blur(0);
+    transition: filter 1.5s;
 }
 .active {}
 .non-active {}
@@ -125,9 +128,9 @@
     font-size: 30px;
     text-shadow: 5px 4px 3px #616161;
     /* color: yellow; */
-    opacity: .6;
+    opacity: .7;
     /* transform: rotate(15deg); */
-    transition: opacity 0.7s;
+    transition: opacity 0.5s;
     display: flex;
     z-index: 100;
 }
@@ -136,4 +139,15 @@
     color: rgb(255, 153, 0);
     margin-right: 10px;
     line-height: 35px;
+}
+.game-over {
+    font-weight: bold;
+    font-size: 62px;
+    text-shadow: 1px 8px 3px #292929;
+    position: absolute;
+    top: 25%;
+    left: 37%;
+    z-index: 20;
+    opacity: 0;
+    transition: opacity 2s;
 }

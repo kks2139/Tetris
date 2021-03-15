@@ -24,7 +24,6 @@ function Tetris(){
         setHideMenu(true);
         setCurrLevel(textContent);
         setHideBody(false);
-
     }
     const popupClicked = ({id})=>{
         setHidePop(true);
@@ -34,13 +33,17 @@ function Tetris(){
             alert(id);
         }
     }
+    const onBackToMenu = ()=>{
+        setHideMenu(false);
+        setHideBody(true);
+    }
 
 
     return(
         <div className="frame">
             <PopupMenu popupHide={hidePop} onButtonClick={popupClicked}></PopupMenu>
-            <FirstMenu menuHide={hideMenu} onSelect={levelSelected} level={level}></FirstMenu>
-            <MainBody bodyHide={hideBody} size={bodySize} pause={pause} level={currLevel}></MainBody>
+            {hideMenu ? null : <FirstMenu onSelect={levelSelected} level={level}></FirstMenu>}
+            {hideBody ? null : <MainBody size={bodySize} pause={pause} level={currLevel} onBackToMenu={onBackToMenu}></MainBody>}
         </div>
     );
 }

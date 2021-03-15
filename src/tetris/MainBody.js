@@ -53,7 +53,7 @@ function makeBlock(body, idx, size, lvl, fallRef, moveDownFunc, blockCount){
     }
 
     // 난이도별 타이머 간격
-    const speed = lvl === "Easy" ? 1000 : lvl === "Normal" ? 600 : lvl === "Hard" ? 200 : 90;   
+    const speed = lvl === "Easy" ? 1000 : lvl === "Normal" ? 600 : lvl === "Hard" ? 300 : 150;   
     fallRef.current = setInterval(moveDownFunc, speed);
 }
 
@@ -299,13 +299,15 @@ function removeLayer(layer, body, size){
     }
 }
 
-function MainBody({bodyHide = true, size = 10, pause, level = "Easy"}){
+function MainBody({bodyHide = true, size = 10, pause, level = "Easy", onBackToMenu}){
     const body = useRef();
     const idx = Math.floor(Math.random() * 10 % 7 + 1);
     const [blockCount, setBlockCount] = useState(0);
     const [score, setScore] = useState(0);
     const [comboStack, setComboStack] = useState(0);
     const fallRef = useRef('');
+    const overRef = useRef();
+    
 
     const combo_timerId = useRef('');  // timer id
     const combo_limit = useRef(3); // 제한시간
@@ -331,7 +333,7 @@ function MainBody({bodyHide = true, size = 10, pause, level = "Easy"}){
                     combo_limit.current = 3;
                 }
                 combo_timerId.current = setInterval(()=>{
-                    if(combo_limit.current == 3) combo_div.current.style.opacity = 0.6;
+                    if(combo_limit.current == 3) combo_div.current.style.opacity = 0.8;
                     combo_limit.current--;    
                     
                     if(combo_limit.current == 1) combo_div.current.style.opacity = 0;
@@ -355,17 +357,27 @@ function MainBody({bodyHide = true, size = 10, pause, level = "Easy"}){
         }
     };
 
+    const backToMenuClick = (e)=>{
+        onBackToMenu();
+    }
+
     useEffect(()=>{
         // 꼭대기의 중앙부분 찼는지 확인
         if(isUnderCelling(body.current, size)){
-            alert("Game Over");
+            // alert("Game Over");
+
+            body.current.style.filter = "blur(6px)";
+            overRef.current.style.opacity = 1;
         }else{
-            if(!bodyHide) makeBlock(body, idx, size, level, fallRef, moveDownFunc, blockCount);
+            //if(bodyHide) clearBlocks(body.current);
+            makeBlock(body, idx, size, level, fallRef, moveDownFunc, blockCount);
         }
-    }, [bodyHide, blockCount]);
+    }, [blockCount]);
+
+
 
     useEffect(()=>{
-        document.addEventListener("keydown", (e)=>{
+        const onKeyDown = (e)=>{
             const curr = document.querySelector('div.active');
             if(!curr) return;
             if(isTouched(false, curr, size, e.key) || collision(false, curr, size, e.key)) return;
@@ -387,9 +399,9 @@ function MainBody({bodyHide = true, size = 10, pause, level = "Easy"}){
                          curr.style.transform = `rotate(${deg - 90}deg)`;
                     }else{
                         isTouched(true, curr, size);
-                        if(curr.classList.contains('block-color1')){
-                            isTouched(true, curr, size); // 'ㅡ' 모양은 한번 더 체크한다
-                        }
+                        // if(curr.classList.contains('block-color1')){
+                        //     isTouched(true, curr, size); // 'ㅡ' 모양은 한번 더 체크한다
+                        // }
                     }
                     break;
                 case 'j':
@@ -399,7 +411,11 @@ function MainBody({bodyHide = true, size = 10, pause, level = "Easy"}){
                         moveDown += size;
                     }
             }
-        })
+        }
+        document.addEventListener("keydown", onKeyDown);
+        return ()=>{ // hide = true 되서 컴포넌트 제거되기 직전에 document 이벤트 해지시킴
+            document.removeEventListener("keydown", onKeyDown); 
+        };
     },[]);
 
     // 가로-10 세로-20 은 고정값
@@ -409,7 +425,7 @@ function MainBody({bodyHide = true, size = 10, pause, level = "Easy"}){
     };
 
     return(
-        <div hidden={bodyHide} style={{margin: "auto"}}>
+        <div style={{margin: "auto"}}>
             <div style={{height : "40px"}}>
                 <div className="score">Score : {score}</div>
 
@@ -424,6 +440,10 @@ function MainBody({bodyHide = true, size = 10, pause, level = "Easy"}){
                         Combo!
                     </div> 
                 : null}
+            </div>
+            <div className="game-over" ref={overRef}>
+                Game Over
+                <div class="label3" style={{margin : "40px auto"}} onClick={backToMenuClick}>Back to menu</div>
             </div>
             <div id="body" className="body-frame" ref={body} style={bodySize}></div>
         </div>
