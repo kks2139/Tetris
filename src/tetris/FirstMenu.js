@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './Tetris.css';
 
 function FirstMenu({onSelect, level = []}){
@@ -25,6 +25,12 @@ function FirstMenu({onSelect, level = []}){
         clearInterval(timerId.current);
         onSelect(e.target);
     }
+
+    useEffect(()=>{
+        return ()=>{
+            clearInterval(timerId.current);
+        };
+    },[]);
 
     return(
         <>

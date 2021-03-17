@@ -299,7 +299,7 @@ function removeLayer(layer, body, size){
     }
 }
 
-function MainBody({bodyHide = true, size = 10, pause, level = "Easy", onBackToMenu}){
+function MainBody({size = 10, pause, level = "Easy", onBackToMenu, onRestart}){
     const body = useRef();
     const idx = Math.floor(Math.random() * 10 % 7 + 1);
     const [blockCount, setBlockCount] = useState(0);
@@ -333,7 +333,7 @@ function MainBody({bodyHide = true, size = 10, pause, level = "Easy", onBackToMe
                     combo_limit.current = 3;
                 }
                 combo_timerId.current = setInterval(()=>{
-                    if(combo_limit.current == 3) combo_div.current.style.opacity = 0.8;
+                    if(combo_limit.current == 3) combo_div.current.style.opacity = 0.9;
                     combo_limit.current--;    
                     
                     if(combo_limit.current == 1) combo_div.current.style.opacity = 0;
@@ -360,6 +360,9 @@ function MainBody({bodyHide = true, size = 10, pause, level = "Easy", onBackToMe
     const backToMenuClick = (e)=>{
         onBackToMenu();
     }
+    const restartClick = (e)=>{
+        onRestart(level);
+    }
 
     useEffect(()=>{
         // 꼭대기의 중앙부분 찼는지 확인
@@ -374,7 +377,14 @@ function MainBody({bodyHide = true, size = 10, pause, level = "Easy", onBackToMe
         }
     }, [blockCount]);
 
-
+    useEffect(()=>{
+        if(pause){
+            clearInterval(fallRef.current);
+        }else{
+            const speed = level === "Easy" ? 1000 : level === "Normal" ? 600 : level === "Hard" ? 300 : 150;  
+            //setInterval(moveDownFunc, speed);
+        }
+    }, [pause]);
 
     useEffect(()=>{
         const onKeyDown = (e)=>{
@@ -415,6 +425,7 @@ function MainBody({bodyHide = true, size = 10, pause, level = "Easy", onBackToMe
         document.addEventListener("keydown", onKeyDown);
         return ()=>{ // hide = true 되서 컴포넌트 제거되기 직전에 document 이벤트 해지시킴
             document.removeEventListener("keydown", onKeyDown); 
+            clearInterval(fallRef.current);
         };
     },[]);
 
@@ -427,7 +438,11 @@ function MainBody({bodyHide = true, size = 10, pause, level = "Easy", onBackToMe
     return(
         <div style={{margin: "auto"}}>
             <div style={{height : "40px"}}>
-                <div className="score">Score : {score}</div>
+                <div style={{display : "flex"}}>
+                    <div className="score">Score : {score}</div>
+                    <div style={{margin : "0 auto"}}></div>
+                    <div className="score">Level : {level}</div>
+                </div>
 
                 {/* <div className="combo" ref={combo_div}>
                         <div className="combo-number">{comboStack}</div> 
@@ -443,6 +458,7 @@ function MainBody({bodyHide = true, size = 10, pause, level = "Easy", onBackToMe
             </div>
             <div className="game-over" ref={overRef}>
                 Game Over
+                <div class="label3" style={{margin : "40px auto"}} onClick={restartClick}>Restart</div>
                 <div class="label3" style={{margin : "40px auto"}} onClick={backToMenuClick}>Back to menu</div>
             </div>
             <div id="body" className="body-frame" ref={body} style={bodySize}></div>

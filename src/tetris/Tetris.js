@@ -7,6 +7,7 @@ function Tetris(){
     const [hidePop, setHidePop] = useState(true);
     const [hideMenu, setHideMenu] = useState(false);
     const [hideBody, setHideBody] = useState(true);
+
     const [bodySize, setBodySize] = useState(32);
     const [pause, setPause] = useState(false);
     const level = ["Easy", "Normal", "Hard", "Extreme"];
@@ -22,28 +23,30 @@ function Tetris(){
 
     const levelSelected = ({textContent})=>{
         setHideMenu(true);
-        setCurrLevel(textContent);
         setHideBody(false);
+        setCurrLevel(textContent);
     }
     const popupClicked = ({id})=>{
         setHidePop(true);
         if(id === "btn1"){
-            alert(id);
-        }else{
-            alert(id);
+            setHideMenu(false);
+            setHideBody(true);
         }
     }
     const onBackToMenu = ()=>{
         setHideMenu(false);
         setHideBody(true);
     }
-
+    const onRestart = (lvl)=>{
+        setHideBody(true);
+        setTimeout(()=>{setHideBody(false);}, 50);
+    }
 
     return(
         <div className="frame">
-            <PopupMenu popupHide={hidePop} onButtonClick={popupClicked}></PopupMenu>
+            {hidePop ? null : <PopupMenu onButtonClick={popupClicked}></PopupMenu>}
             {hideMenu ? null : <FirstMenu onSelect={levelSelected} level={level}></FirstMenu>}
-            {hideBody ? null : <MainBody size={bodySize} pause={pause} level={currLevel} onBackToMenu={onBackToMenu}></MainBody>}
+            {hideBody ? null : <MainBody size={bodySize} pause={pause} level={currLevel} onRestart={onRestart} onBackToMenu={onBackToMenu}></MainBody>}
         </div>
     );
 }
