@@ -71,7 +71,7 @@
     left: 35.5%;
     top: 35%;
     background-color: black;
-    border: 10px solid;
+    border: 6px solid;
     border-radius: 7px;
     text-align: center;
     padding: 33px 0 0 55px;
@@ -172,4 +172,35 @@
 }
 .rank-score {
     /* margin-left: 20px; */
+}
+
+.input-box {
+    padding-top: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    z-index: 100;
+    width: 350px;
+    height: 250px;
+    position: absolute;
+    left: 35.5%;
+    top: 35.5%;
+    background-color: black;
+    border: 6px solid;
+    border-radius: 7px;
+    text-align: center;
+}
+.input-box > .input-row {
+    display: flex;
+    margin-top: 10px;
+}
+.input-row > .input-text {
+    width : 130px;
+    text-align: right;
+    margin-right: 15px;
+} 
+.input-box > .label3 {
+    width: 100px;
+    height: 38px;
+    margin: 18px auto 0 auto;
+    font-size: 25px;
 }

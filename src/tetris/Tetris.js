@@ -2,14 +2,16 @@ import React, { useEffect, useState } from 'react';
 import FirstMenu from './FirstMenu';
 import PopupMenu from './PopupMenu';
 import MainBody from './MainBody';
+import InputBox from './InputBox';
 
 function Tetris(){
     const [hidePop, setHidePop] = useState(true);
     const [hideMenu, setHideMenu] = useState(false);
     const [hideBody, setHideBody] = useState(true);
-    
+    const [hideInput, setHideInput] = useState(true);
+    const [score, setScore] = useState(0);
+
     const [bodySize, setBodySize] = useState(32);
-    const [pause, setPause] = useState(false);
     const level = ["Easy", "Normal", "Hard", "Extreme"];
     const [currLevel, setCurrLevel] = useState("");
 
@@ -45,13 +47,22 @@ function Tetris(){
         // alert('랭킹 보여주자');
 
     }
+    const onRecord = (score)=>{ // game over 되었을때
+        setHideInput(false);
+        setScore(score);
+    }
+    const onQuit = ()=>{
+        setHideInput(true);
+    }
+    const onConfirm = ()=>{
+        // 기록 insert
+    }
     return(
         <div className="frame">
-            
             {hidePop ? null : <PopupMenu onButtonClick={popupClicked}></PopupMenu>}
             {hideMenu ? null : <FirstMenu onSelect={levelSelected} clickRanking={clickRanking} level={level}></FirstMenu>}
-            {hideBody ? null : <MainBody size={bodySize} pause={pause} level={currLevel} onRestart={onRestart} onBackToMenu={onBackToMenu}></MainBody>}
-
+            {hideBody ? null : <MainBody size={bodySize} level={currLevel} onRecord={onRecord} onRestart={onRestart} onBackToMenu={onBackToMenu}></MainBody>}
+            {hideInput ? null : <InputBox score={score} onQuit={onQuit} onConfirm={onConfirm}></InputBox>}
         </div>
     );
 }

@@ -299,7 +299,7 @@ function removeLayer(layer, body, size){
     }
 }
 
-function MainBody({size = 10, pause, level = "Easy", onBackToMenu, onRestart}){
+function MainBody({size = 10, level = "Easy", onBackToMenu, onRestart, onRecord}){
     const body = useRef();
     const idx = Math.floor(Math.random() * 10 % 7 + 1);
     const [blockCount, setBlockCount] = useState(0);
@@ -370,21 +370,14 @@ function MainBody({size = 10, pause, level = "Easy", onBackToMenu, onRestart}){
             // alert("Game Over");
 
             body.current.style.filter = "blur(6px)";
-            overRef.current.style.opacity = 1;
+            overRef.current.hidden = false;
+            setTimeout(()=> overRef.current.style.opacity = 1, 50);
+
         }else{
             //if(bodyHide) clearBlocks(body.current);
             makeBlock(body, idx, size, level, fallRef, moveDownFunc, blockCount);
         }
     }, [blockCount]);
-
-    useEffect(()=>{
-        if(pause){
-            clearInterval(fallRef.current);
-        }else{
-            const speed = level === "Easy" ? 1000 : level === "Normal" ? 600 : level === "Hard" ? 300 : 150;  
-            //setInterval(moveDownFunc, speed);
-        }
-    }, [pause]);
 
     useEffect(()=>{
         const onKeyDown = (e)=>{
@@ -456,10 +449,11 @@ function MainBody({size = 10, pause, level = "Easy", onBackToMenu, onRestart}){
                     </div> 
                 : null}
             </div>
-            <div className="game-over" ref={overRef}>
+            <div className="game-over" ref={overRef} hidden={true}>
                 Game Over
-                <div class="label3" style={{margin : "40px auto"}} onClick={restartClick}>Restart</div>
-                <div class="label3" style={{margin : "40px auto"}} onClick={backToMenuClick}>Back to menu</div>
+                <div class="label3" style={{margin : "20px auto"}} onClick={restartClick}>Restart</div>
+                <div class="label3" style={{margin : "20px auto"}} onClick={backToMenuClick}>Back to menu</div>
+                <div class="label3" style={{margin : "20px auto"}} onClick={()=>{onRecord(score)}}>Record</div>
             </div>
             <div id="body" className="body-frame" ref={body} style={bodySize}></div>
         </div>
