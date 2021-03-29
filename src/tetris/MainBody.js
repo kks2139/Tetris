@@ -106,7 +106,7 @@ function isTouched(rotate, block, size, key){
     const {top, minLeft, maxLeft, bodyInfo} = getBlockRect(block);
 
     if(rotate){ // 회전시 삐져나온부분 체크
-        const bw = 5; // body 의 border width
+        const bw = 7; // body 의 border width
         const leftSide = bodyInfo.left + bw - minLeft;
         const rightSide = maxLeft + size - (bodyInfo.left + bw + w);
         const downSide = top - (bodyInfo.top + bw + h);
@@ -299,7 +299,7 @@ function removeLayer(layer, body, size){
     }
 }
 
-function MainBody({size = 10, level = "Easy", onBackToMenu, onRestart, onRecord}){
+function MainBody({size = 10, level = "Easy", onBackToMenu, onRestart, onRecord, recordDone}){
     const body = useRef();
     const idx = Math.floor(Math.random() * 10 % 7 + 1);
     const [blockCount, setBlockCount] = useState(0);
@@ -307,6 +307,7 @@ function MainBody({size = 10, level = "Easy", onBackToMenu, onRestart, onRecord}
     const [comboStack, setComboStack] = useState(0);
     const fallRef = useRef('');
     const overRef = useRef();
+    const labelRef = useRef();
     
 
     const combo_timerId = useRef('');  // timer id
@@ -363,6 +364,14 @@ function MainBody({size = 10, level = "Easy", onBackToMenu, onRestart, onRecord}
     const restartClick = (e)=>{
         onRestart(level);
     }
+    const recordClick = (e)=>{
+        if(labelRef.current.classList.contains("label-disabled")) return;
+        onRecord(score);
+    }
+
+    useEffect(()=>{
+        if(recordDone) labelRef.current.classList.add("label-disabled");
+    }, [recordDone]);
 
     useEffect(()=>{
         // 꼭대기의 중앙부분 찼는지 확인
@@ -453,7 +462,7 @@ function MainBody({size = 10, level = "Easy", onBackToMenu, onRestart, onRecord}
                 Game Over
                 <div class="label3" style={{margin : "20px auto"}} onClick={restartClick}>Restart</div>
                 <div class="label3" style={{margin : "20px auto"}} onClick={backToMenuClick}>Back to menu</div>
-                <div class="label3" style={{margin : "20px auto"}} onClick={()=>{onRecord(score)}}>Record</div>
+                <div class="label3" style={{margin : "20px auto"}} onClick={recordClick} ref={labelRef}>Record</div>
             </div>
             <div id="body" className="body-frame" ref={body} style={bodySize}></div>
         </div>

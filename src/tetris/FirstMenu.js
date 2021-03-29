@@ -3,7 +3,7 @@ import RankingBox from './RankingBox';
 import './Tetris.css';
 
 
-function FirstMenu({onSelect, level = []}){
+function FirstMenu({onSelect, level = [], onRefresh}){
     const [menu1, setMenu1] = useState("start");
     const [menu2, setMenu2] = useState("Ranking");
     const [cls, setCls] = useState("label1");
@@ -12,6 +12,8 @@ function FirstMenu({onSelect, level = []}){
     const divRef = useRef();
     const [hideRank, setHideRank] = useState(true);
     const [hideMenu, setHideMenu] = useState(false);
+
+    level = level.concat(["Back"]);
 
     const clickStart = (e)=>{
         if(e.target.textContent === "select level") return;
@@ -23,12 +25,13 @@ function FirstMenu({onSelect, level = []}){
             const r2 = Math.random() * 1000 % 256;
             const r3 = Math.random() * 1000 % 256;
             divRef.current.style.color = `rgb(${r1}, ${r2}, ${r3})`;
-        },600);
+        },500);
     };
 
     const clickLevel = (e)=>{
         clearInterval(timerId.current);
-        onSelect(e.target);
+        if(e.target.textContent === "Back") onRefresh();
+        else onSelect(e.target);
     }
     const clickRanking = ()=>{
         setHideMenu(true);
@@ -40,19 +43,15 @@ function FirstMenu({onSelect, level = []}){
     }
 
     useEffect(()=>{
-        return ()=>{
-            clearInterval(timerId.current);
-        };
+        return ()=>{clearInterval(timerId.current)};
     },[]);
-
-    
 
     return(
         <>
             <div className="menu-box">
                 <div className="title">TETRIS</div>
                 <div hidden={hideMenu}>
-                    <div style={{marginTop : "20vh"}}>
+                    <div style={{marginTop : "15vh"}}>
                         <div className={cls} onClick={clickStart} ref={divRef}>{menu1}</div>
                         <div className="label1" onClick={clickRanking} hidden={isClicked}>{menu2}</div>
                     </div>

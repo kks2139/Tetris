@@ -1,5 +1,5 @@
 .frame {
-    border: 15px solid rgb(255, 143, 14);
+    border: 15px solid rgb(52, 255, 144);
     width: 100%;
     display: flex;
 }
@@ -16,27 +16,28 @@
     color: white !important;
     font-size: 40px;
     font-weight: bold;
-    margin: 25px auto 0px auto;
+    margin: 20px auto 0px auto;
     padding: 3px;
     width: 200px;
     height:50px;
     border: 2px solid white;
-    border-radius: 10px;
+    border-radius: 15px;
     line-height: 40px;
-    background-color: black;
+    background-color: rgb(34, 34, 34);
     transition: background-color 0.3s, 
                 width 0.3s;
 }
 .label1:hover {
     cursor: pointer;
-    background-color: rgb(255, 143, 14);
+    background-color: rgb(52, 255, 144);
+    color: #202124 !important;
     width: 230px;
 }
 .label1:active {
-    background-color: rgb(214, 114, 0);
+    background-color: rgb(0, 163, 73);
 }
 .label2 {
-    font-size: 40px;
+    font-size: 45px;
     font-weight: bold;
     margin: 15vh auto 0px auto;  
     transition: color 0.5s;
@@ -45,7 +46,7 @@
     margin-top: 30px;
     font-size: 30px;
     font-weight: bold;
-    margin: 20px 30px 0 0;
+    margin: 12px 30px 0 0;
     border: 1px solid;
     border-radius: 7px;
     padding: 0 20px;
@@ -54,7 +55,7 @@
     transition: border 0.2s, color 0.2s;
 }
 .label3:hover {
-    border: 3px solid rgb(214, 114, 0);
+    border: 1px solid rgb(52, 255, 144);
     /* color: rgb(214, 114, 0); */
     cursor: pointer;
 }
@@ -66,16 +67,16 @@
 .popup-box {
     z-index: 100;
     width: 300px;
-    height: 200px;
+    height: 180px;
     position: absolute;
-    left: 35.5%;
+    transform: translate(-50%);
+    left: 50%;
     top: 35%;
     background-color: black;
-    border: 6px solid;
-    border-radius: 7px;
+    border: 6px solid rgb(175, 175, 175);
+    border-radius: 15px;
     text-align: center;
     padding: 33px 0 0 55px;
-    transition: border 0.7s;
 }
 .modal-back {
     position: absolute;
@@ -86,8 +87,8 @@
 }
 
 .body-frame {
-    border: 5px solid rgb(255, 143, 14);
-    border-radius: 4px;
+    border: 7px solid rgb(18, 155, 80);
+    border-radius: 6px;
     margin: auto;
     filter: blur(0);
     transition: filter 1.5s;
@@ -137,7 +138,7 @@
 }
 .combo-number {
     font-size: 50px;
-    color: rgb(255, 153, 0);
+    color: rgb(52, 255, 144);
     margin-right: 10px;
     line-height: 35px;
 }
@@ -145,7 +146,7 @@
     font-weight: bold;
     font-size: 62px;
     text-align: center;
-    text-shadow: 1px 8px 3px #292929;
+    text-shadow: 4px 6px 3px #292929;
     position: absolute;
     top: 25%;
     z-index: 20;
@@ -157,7 +158,7 @@
     margin-top: 50px;
 }
 .rank-row {
-    border: 1px solid rgb(255, 185, 106);
+    border: 1px solid rgb(52, 255, 144);
     border-radius: 7px;
     padding: 10px;
     width: 400px;
@@ -182,11 +183,12 @@
     width: 350px;
     height: 250px;
     position: absolute;
-    left: 35.5%;
+    left: 50%;
     top: 35.5%;
+    transform: translateX(-50%);
     background-color: black;
-    border: 6px solid;
-    border-radius: 7px;
+    border: 6px solid rgb(175, 175, 175);
+    border-radius: 15px;
     text-align: center;
 }
 .input-box > .input-row {
@@ -204,3 +206,22 @@
     margin: 18px auto 0 auto;
     font-size: 25px;
 }
+
+.toast {
+    z-index: 999;
+    position: absolute;
+    left: 17%;
+    top: 252px;
+    height: 23px;
+    width: 230px;
+    border-radius: 4px;
+    color: rgb(255, 97, 97);
+    /* background-color: rgb(105, 105, 105); */
+    font-weight: bold;
+    font-size: 14px;
+    visibility: hidden;
+}
+.label-disabled {
+    color: #757575;
+}
+.label-disabled:hover {cursor: none}
