@@ -346,11 +346,9 @@ function MainBody({size = 10, level = "Easy", onBackToMenu, onRestart, onRecord,
                 }, 1000);
                 setComboStack(n => {
                     currCombo = n + 1;
-                    console.log(currCombo);
                     return n + 1;
                 });
             }
-            console.log("ee " + currCombo);
             setScore(n => n + fullLayer.length * 10 * currCombo); // 한줄당 10점 (x콤보)
             setBlockCount(n => n + 1); // makeBlock 실행
         }else{
@@ -366,7 +364,7 @@ function MainBody({size = 10, level = "Easy", onBackToMenu, onRestart, onRecord,
     }
     const recordClick = (e)=>{
         if(labelRef.current.classList.contains("label-disabled")) return;
-        onRecord(score);
+        onRecord({score, level});
     }
 
     useEffect(()=>{

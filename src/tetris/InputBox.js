@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 
-function InputBox({score, onQuit, onConfirm}){
+function InputBox({info, onQuit, onConfirm}){
  
     const [name, setName] = useState("");
     const [pw, setPw] = useState("");
@@ -17,7 +17,7 @@ function InputBox({score, onQuit, onConfirm}){
     }
     const onClickConfirm = (e)=>{
         if(validate(["name", "pw"])){
-            onConfirm({name, pw, score});
+            onConfirm({name, pw, score : info.score, level : info.lvl});
         }
     }
 
@@ -43,14 +43,14 @@ function InputBox({score, onQuit, onConfirm}){
 
     return(
         <div className="input-box">
-            <div>Your Score : {score}</div>
+            <div>{`Your Score : ${info.score} (${info.lvl})`}</div>
             <div className="input-row">
                 <div className="input-text">Name :</div>
                 <input name="name" onChange={onChange} value={name} ref={inputRef1} maxLength="15"></input>
             </div>
             <div className="input-row">
                 <div className="input-text">Password :</div> 
-                <input name="pw" onChange={onChange} value={pw} ref={inputRef2} maxLength="15"></input>
+                <input name="pw" type="password" onChange={onChange} value={pw} ref={inputRef2} maxLength="15"></input>
             </div>
             <div className="label3" onClick={onClickConfirm}>Confirm</div>
             <div className="label3" onClick={()=>{onQuit()}}>Quit</div>

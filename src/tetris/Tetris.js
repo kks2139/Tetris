@@ -3,6 +3,7 @@ import FirstMenu from './FirstMenu';
 import PopupMenu from './PopupMenu';
 import MainBody from './MainBody';
 import InputBox from './InputBox';
+import {UT} from './util/util';
 
 function Tetris(){
     const [hidePop, setHidePop] = useState(true);
@@ -10,7 +11,7 @@ function Tetris(){
     const [hideBody, setHideBody] = useState(true);
     const [hideInput, setHideInput] = useState(true);
     const [recordDone, setRecordDone] = useState(false);
-    const [score, setScore] = useState(0);
+    const [result, setResult] = useState({score : 0, lvl : ""});
 
     const [bodySize, setBodySize] = useState(32);
     const level = ["Easy", "Normal", "Hard", "Extreme"];
@@ -52,22 +53,38 @@ function Tetris(){
         // alert('랭킹 보여주자');
 
     }
-    const onRecord = (score)=>{ // game over 되었을때
+    const onRecord = ({score, level})=>{ // game over 되었을때
         setHideInput(false);
-        setScore(score);
+        setResult({score, lvl : level});
     }
     const onQuit = ()=>{
         setHideInput(true);
     }
-    const onConfirm = ({name, pw, score})=>{
-        
+    const onConfirm = ({name, pw, score, level})=>{
+        const param = {
+            url : "saveScore",
+            body : {
+                name,
+                score,
+                level,
+                id : UT.uuid()    
+            }
+        };
+        UT.request(param, (res)=>{
+            setHideInput(true);
+            if(res.status === 200){
+                alert("Recorded!");
+            }else{
+                alert("Error occured.");
+            }
+        });
     }
     return(
         <div className="frame">
             {hidePop ? null : <PopupMenu onButtonClick={popupClicked}></PopupMenu>}
             {hideMenu ? null : <FirstMenu onSelect={levelSelected} clickRanking={clickRanking} level={level} onRefresh={onRefresh}></FirstMenu>}
             {hideBody ? null : <MainBody size={bodySize} level={currLevel} onRecord={onRecord} onRestart={onRestart} onBackToMenu={onBackToMenu} recordDone={recordDone}></MainBody>}
-            {hideInput ? null : <InputBox score={score} onQuit={onQuit} onConfirm={onConfirm}></InputBox>}
+            {hideInput ? null : <InputBox info={result} onQuit={onQuit} onConfirm={onConfirm}></InputBox>}
         </div>
     );
 }
