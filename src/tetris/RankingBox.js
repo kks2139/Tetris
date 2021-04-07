@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import RankingList from './RankingList';
 import RankingHisList from './RankingHisList';
-import {UT} from './util/util';
+import {UT} from '../util/util';
 
 function RankingBox({onBack}){
     const [rankList, setRankList] = useState([]);
@@ -21,12 +21,14 @@ function RankingBox({onBack}){
             body : {name}
         };
         UT.request(param, (res)=>{
-            wrapperRef.current.style.transform = "translateX(-75%)";
+            wrapperRef.current.style.left = "0";
+            wrapperRef.current.style.transform = "translateX(0)";
             setRankHisList(res.result.slice());
             setUserName(name);
         });
     }
     const clickCancel = ()=>{
+        wrapperRef.current.style.left = "50%";
         wrapperRef.current.style.transform = "translateX(-50%)";
         setRankHisList([]);
     }
@@ -63,8 +65,8 @@ function RankingBox({onBack}){
                         <div className="btn-x" onClick={clickCancel}>X</div>
                     </div> : null}
                     <div style={{height : "45vh"}}>
-                        {rankHisList.map((row)=>{
-                            return <RankingHisList item={row}></RankingHisList>
+                        {rankHisList.map((row, idx)=>{
+                            return <RankingHisList item={row} key={idx}></RankingHisList>
                         })}
                     </div>
                 </div>

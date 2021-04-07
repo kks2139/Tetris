@@ -3,7 +3,7 @@ import FirstMenu from './FirstMenu';
 import PopupMenu from './PopupMenu';
 import MainBody from './MainBody';
 import InputBox from './InputBox';
-import {UT} from './util/util';
+import {UT} from '../util/util';
 
 function Tetris(){
     const [hidePop, setHidePop] = useState(true);

@@ -1,5 +1,6 @@
 :root {
     --theme-color : rgb(52, 255, 144);
+    --dot-size : 18px;
 }
 ::-webkit-scrollbar {
     width: 10px;
@@ -175,18 +176,14 @@
     left: 50%;
     transform: translateX(-50%);
     position: relative;
-    transition: transform .3s;
+    transition: transform .3s, left .3s;
 }
 .rank-box {
     height: 45vh;
     width: 700px;
     overflow-y: auto;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
     border-bottom: 5px solid #5e5e5e;
     border-radius: 6px;
-    /* border: 1px solid; */
 }
 .rank-row {
     border: 1px solid var(--theme-color);
@@ -212,7 +209,7 @@
     width: 120px;
 }
 .rank-date {
-    width: 270px;
+    width: 240px;
 }
 .rank-header {
     margin-top: 30px;
@@ -236,7 +233,7 @@
 .rank-his-box {
     height: 45vh;
     width: 300px;
-    margin-left: 30px;
+    margin-left: 20px;
 }
 .rank-his-header {
     margin-top: 30px;
@@ -313,3 +310,48 @@
     color: #757575;
 }
 .label-disabled:hover {cursor: none}
+
+.mask-back{
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.315);
+}
+.mask {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    width: 100px;
+    height: 100px;
+    /* border: 1px solid; */
+}
+.mask > div {
+    z-index: 101;
+    position: fixed;
+    width: var(--dot-size);
+    height: var(--dot-size);
+    border-radius: 50px;
+    /* box-shadow: 3px 1px 0px rgb(203 203 203); */
+}
+
+.dotcol-1 {background-color: rgb(0, 255, 145) !important;}
+.dotcol-2 {background-color: rgb(62, 255, 172) !important;}
+.dotcol-3 {background-color: rgb(140, 255, 205) !important;}
+.dotcol-4 {background-color: rgb(196, 255, 229) !important;}
+.dotcol-5 {background-color: rgb(255, 255, 255) !important;}
+.dotcol-6 {background-color: rgb(255, 255, 255) !important;}
+.dotcol-7 {background-color: rgb(255, 255, 255) !important;}
+.dotcol-8 {background-color: rgb(255, 255, 255) !important;}
+
+.dot1 {left: 50%; transform: translate(calc(-50% + var(--dot-size) + 10px), calc(var(--dot-size) + 50px));}
+.dot2 {left: 50%; transform: translate(calc(-50% + var(--dot-size) + 25px), calc(var(--dot-size) + 25px));}
+.dot3 {left: 50%; transform: translate(calc(-50% + var(--dot-size) + 10px), calc(var(--dot-size) + 0px));}
+.dot4 {left: 50%; transform: translate(-50%, 5px);}
+.dot5 {left: 50%; transform: translate(calc(-50% - var(--dot-size) - 10px), calc(var(--dot-size) + 0px));}
+.dot6 {left: 50%; transform: translate(calc(-50% - var(--dot-size) - 25px), calc(var(--dot-size) + 25px));}
+.dot7 {left: 50%; transform: translate(calc(-50% - var(--dot-size) - 10px), calc(var(--dot-size) + 50px));}
+.dot8 {left: 50%; transform: translate(calc(-50%), calc(var(--dot-size) + 63px));}

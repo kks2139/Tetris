@@ -2,12 +2,11 @@ import React from 'react';
 import './App.css';
 import Tetris from './tetris/Tetris';
 
-export const UserDispatcher = React.createContext(null);
-
 function App() {
+
   return (
     <div className="dark no-drag">
-      <Tetris></Tetris>
+        <Tetris></Tetris>
     </div>
   );
 }
