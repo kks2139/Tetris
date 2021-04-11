@@ -40,35 +40,39 @@ function RankingBox({onBack}){
     return (
         <>
             <div style={{display : "flex"}}>
-                <div className="rank-wrapper" ref={wrapperRef}>
-                    <div className="rank-header">
-                        <div>Rank</div>
-                        <div className="rank-name">Name</div>
-                        <div className="rank-score">Score</div>
-                        <div className="rank-date">Date</div>
-                        <div style={{margin:"0 auto"}}></div>
-                        <div>Title</div>
-                    </div>
-                    <div className="rank-box">
-                        <div style={{height : "45vh"}}>
-                            {rankList.map((rank, idx) => {
-                                if(idx === 0) rank.link = '/rank1.png';
-                                rank.rank = idx + 1;
-                                return <RankingList rank={rank} key={rank.name} onRowClick={getRankHistory}></RankingList>;
-                            })}
+                <div style={{display : "flex", position : "relative", left : "50%", transform : "translateX(-50%)"}}>
+                    <div className="rank-wrapper" ref={wrapperRef}>
+                        <div className="rank-header">
+                            <div>Rank</div>
+                            <div className="rank-name">Name</div>
+                            <div className="rank-score">Score</div>
+                            <div className="rank-date">Date</div>
+                            <div style={{margin:"0 auto"}}></div>
+                            <div>Title</div>
+                        </div>
+                        <div className="rank-box">
+                            <div style={{height : "45vh"}}>
+                                {rankList.map((rank, idx) => {
+                                    if(idx === 0) rank.link = '/rank1.png';
+                                    rank.rank = idx + 1;
+                                    return <RankingList rank={rank} key={rank.name} onRowClick={getRankHistory}></RankingList>;
+                                })}
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="rank-his-box">
-                    {rankHisList.length > 0 ? <div className="rank-his-header">
-                        <div style={{margin : "0 auto"}}>{`${userName}`}</div>
-                        <div className="btn-x" onClick={clickCancel}>X</div>
-                    </div> : null}
-                    <div style={{height : "45vh"}}>
-                        {rankHisList.map((row, idx)=>{
-                            return <RankingHisList item={row} key={idx}></RankingHisList>
-                        })}
+                    {rankHisList.length > 0 ? 
+                    <div style={{marginLeft : "20px"}}>
+                        <div className="rank-his-header">
+                            <div style={{margin : "0 auto"}}>{`${userName}`}</div>
+                            <div className="btn-x" onClick={clickCancel}>X</div>
+                        </div>
+                        <div className="rank-his-box">
+                                {rankHisList.map((row, idx)=>{
+                                    return <RankingHisList item={row} key={idx}></RankingHisList>
+                                })}
+                        </div>
                     </div>
+                    : null}
                 </div>
             </div>
             <div className="label1" onClick={() => onBack()}>Back</div>

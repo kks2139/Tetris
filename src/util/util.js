@@ -22,6 +22,7 @@ export const UT = {
     },
 
     request : ({url, body = {}}, callback)=>{
+        if(!url) return;
         UT.showLoadMask(true);
         fetch("/api/" + url, {
             method: "POST",
@@ -75,7 +76,7 @@ export const UT = {
                     dots[i].classList.remove(color);
                     dots[i].classList.add("dotcol-" + num);
                 }
-            }, 50);
+            }, 80);
 
         }else{
             clearInterval(window.modalIntervalId);
