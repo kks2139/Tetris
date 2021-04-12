@@ -8,7 +8,7 @@ function Welcome(){
     const [isJoin, setIsJoin] = useState(false);
 
     return (
-        <div className="welcome-page">
+        <div className="welcome-page background-theme">
             {!isJoin ? <Login></Login> : null}
             {isJoin ? <Join></Join> : null}
         </div>

@@ -50,10 +50,10 @@ export const UT = {
     showLoadMask : (show)=>{
         const modalRoot = document.querySelector('#modal');
         if(show){
-            if(document.querySelectorAll('div.mask-back').length !== 0) return;
+            if(document.querySelectorAll('div.modal-back').length !== 0) return;
             const maskBack = document.createElement('div');
             const mask = document.createElement('div');
-            maskBack.classList.add('mask-back');
+            maskBack.classList.add('modal-back');
             mask.classList.add('mask');
 
             modalRoot.appendChild(maskBack);
@@ -67,7 +67,7 @@ export const UT = {
             }
 
             window.modalIntervalId = setInterval(()=>{
-                const dots = document.querySelectorAll('div.mask-back div[class*="dot"]');
+                const dots = document.querySelectorAll('div.modal-back div[class*="dot"]');
                 for(var i=0; i<dots.length; i++){
                     const color = dots[i].classList.item(1);
                     var num = Number(color.split('-')[1]);
@@ -82,5 +82,34 @@ export const UT = {
             clearInterval(window.modalIntervalId);
             modalRoot.removeChild(modalRoot.firstChild);
         }
+    },
+
+    alert : (msg)=>{
+        const modalRoot = document.querySelector('#modal');
+        if(document.querySelectorAll('div.modal-back').length !== 0) return;
+        const back = document.createElement('div');
+        const dialog = document.createElement('div'); // alert창
+        const msgBox = document.createElement('div'); // 메시지박스
+        const btnBox = document.createElement('div'); // 버튼박스
+        const okBtn = document.createElement('div'); // 확인버튼
+        
+        back.classList.add('modal-back');
+        dialog.classList.add('dialog');
+        msgBox.classList.add('dialog-msg-box');
+        btnBox.classList.add('dialog-btn-box');
+        okBtn.classList.add('dialog-btn-ok');
+
+        msgBox.textContent = msg;
+        okBtn.textContent = "OK";
+        okBtn.onclick = (e)=>{
+            e.target.onclick = null;
+            modalRoot.removeChild(modalRoot.firstChild);
+        }
+
+        modalRoot.appendChild(back);
+        back.appendChild(dialog);
+        dialog.appendChild(msgBox);
+        dialog.appendChild(btnBox);
+        btnBox.appendChild(okBtn);
     }
 }

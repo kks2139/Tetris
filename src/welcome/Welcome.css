@@ -1,15 +1,15 @@
 .welcome-page {
-    background-color: #f8f8f8;
-    color: black;
+    /* background-color: #f8f8f8; */
+    /* color: black; */
     width: 100%;
     overflow: hidden;
-    border: 10px solid var(--theme-color);
+    /* border: 10px solid var(--theme-color); */
 }
-.title {
-    width: 100%;
+.welcome-title {
+    top: -120px;
     text-align: center;
-    font-size: 65px;
-    margin-top: 30px;
+    font-size: 70px;
+    font-weight: 500;
 }
 .login-box {
     position: absolute;
@@ -19,48 +19,56 @@
     width: 350px;
     height: 300px;
     background-color: white;
-    border-radius: 10px;
-    box-shadow: 2px 2px 15px 0px rgb(44, 44, 44);
-    font-weight: bold;
+    border-radius: 20px;
+    box-shadow: 0px 0px 25px -10px rgb(44, 44, 44);
+    /* font-weight: bold; */
 }
+.login-box div, .login-box input {position: relative;}
 .login-text {
     text-align: center;
     font-size: 23px;
-    margin-top: 30px;
+    font-weight: bold;
+    top: -70px;
 }
 .signin-text {
-    position: relative;
     text-align: center;
-    top: 27%;
-    color: var(--theme-color);
+    top: -5px;
     font-size: 18px;
 }
-.signin-text:hover {
+.signin-text span[data-name] {
+    color: var(--theme-color);
+    font-weight: bold;
+}
+.signin-text span:hover[data-name] {
     text-decoration: underline;
     cursor: pointer;
 }
 .input-login {
-    position: relative;
-    top: 20%;
+    top: -30px;
     display: flex;
     color: black;
     margin-top: 6px;
+    height: 35px;
 }
 .input-login > input {
-    position: relative;
     left: 50%;
     transform: translateX(-50%);
     caret-color: var(--theme-color);
-    border: 2px solid #bdbdbd;
+    border: 1px solid #bdbdbd;
     border-radius: 50px;
     padding: 7px 7px 7px 15px;
-    width: 200px;
+    width: 222px;
+    height: 35px;
+    color: var(--inactive-color);
+    box-sizing: border-box;
 }
 .input-login > input:hover {
-    border: 2px solid var(--theme-color);
+    border: 1px solid var(--theme-color);
+    box-shadow: 0px 0px 8px -2px var(--theme-color);
 }
 .input-login > input:focus {
-    border: 2px solid var(--theme-color);
+    border: 1px solid var(--theme-color);
+    box-shadow: 0px 0px 8px -2px var(--theme-color);
 }
 .input-login > input::placeholder {
     color: var(--inactive-color);
@@ -69,7 +77,7 @@
 .login-button {
     position: relative;
     left: 50%;
-    top: 20%;
+    top: -30px;
     transform: translateX(-50%);
     text-align: center;
     border-radius: 50px;
@@ -78,5 +86,22 @@
     margin-top: 6px;
     color: white;
     background-image: linear-gradient(-45deg, var(--theme-color2), var(--theme-color));
+    font-weight: bold;
 }
-.login-button:hover {cursor: pointer;}
+.login-button:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 8px -1px var(--inactive-color);
+}
+
+.warn-input {
+    box-shadow: 0px 0px 8px -2px var(--warn);
+    border: 1px solid var(--warn) !important;
+}
+.warn-msg {
+    color: var(--warn);
+    position: relative;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    top: -24px;
+}
