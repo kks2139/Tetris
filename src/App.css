@@ -4,7 +4,7 @@
     --theme-color : #59b4ff;
     --theme-color2 : #ff89f5;
     --inactive-color : rgb(175, 175, 175);
-    --warn : rgba(255, 70, 64, 0.658);
+    --warn : rgba(255, 70, 64, 0.76);
     --dot-size : 18px;
 }
 ::-webkit-scrollbar {

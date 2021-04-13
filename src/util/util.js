@@ -84,7 +84,7 @@ export const UT = {
         }
     },
 
-    alert : (msg)=>{
+    alert : (msg, callback)=>{
         const modalRoot = document.querySelector('#modal');
         if(document.querySelectorAll('div.modal-back').length !== 0) return;
         const back = document.createElement('div');
@@ -102,6 +102,7 @@ export const UT = {
         msgBox.textContent = msg;
         okBtn.textContent = "OK";
         okBtn.onclick = (e)=>{
+            if(callback && typeof callback === "function") callback();
             e.target.onclick = null;
             modalRoot.removeChild(modalRoot.firstChild);
         }

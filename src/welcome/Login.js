@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { UT } from '../util/util';
 
-function Login(){
+function Login({onClickSignIn}){
     const [id, setId] = useState("");
     const [pw, setPw] = useState("");
     const [warnMsg, setWarnMsg] = useState("");
-    const [showWarn, setShowWarn] = useState(false);
     const ref_box = useRef();
     const ref_warn = useRef();
 
@@ -25,7 +24,7 @@ function Login(){
         if(e.target.dataset.name === "login"){
             goLogin();
         }else{
-
+            onClickSignIn();
         }
     }
     const onKeyDown = (e)=>{
@@ -68,7 +67,7 @@ function Login(){
                 <input name="id" onChange={onChange} onKeyDown={onKeyDown} placeholder="User Name"></input>
             </div>
             <div className="input-login">
-                <input name="pw" onChange={onChange} onKeyDown={onKeyDown} placeholder="Password"></input>
+                <input name="pw" onChange={onChange} onKeyDown={onKeyDown} placeholder="Password" type="password"></input>
             </div>
             <div className="login-button" data-name="login" onClick={onClick}>Login</div>
 

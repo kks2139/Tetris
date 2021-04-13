@@ -4,13 +4,19 @@ import Login from "./Login";
 import './Welcome.css';
 
 function Welcome(){
-    
     const [isJoin, setIsJoin] = useState(false);
+
+    const clickSignIn = ()=>{
+        setIsJoin(true);
+    }
+    const joinEnd = ()=>{
+        setIsJoin(false);
+    }
 
     return (
         <div className="welcome-page background-theme">
-            {!isJoin ? <Login></Login> : null}
-            {isJoin ? <Join></Join> : null}
+            {!isJoin ? <Login onClickSignIn={clickSignIn}></Login> : null}
+            {isJoin ? <Join onJoinEnd={joinEnd}></Join> : null}
         </div>
     );
 }
