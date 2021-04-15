@@ -1,16 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Tetris from './tetris/Tetris';
 import Welcome from './welcome/Welcome';
 
-function App() {
+export const SessionContext = React.createContext(null);
 
-  return (
-    <div className="dark no-drag">
-        {/* <Tetris></Tetris> */}
-        <Welcome></Welcome>
-    </div>
-  );
+function App() {
+    const [Session, setSession] = useState({id : null, login : false});
+
+    const onLoginSuccess = (id)=>{
+      setSession({
+        id,
+        login : true
+      });
+    }
+
+    return (
+        <div className="dark no-drag">
+            <SessionContext.Provider value={Session}>
+                {Session.login ? <Tetris></Tetris> : null}
+                {Session.login ? null : <Welcome onLoginSuccess={onLoginSuccess}></Welcome>}
+            </SessionContext.Provider>
+        </div>
+);
 }
 
 export default App;

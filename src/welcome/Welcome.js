@@ -3,7 +3,7 @@ import Join from './Join';
 import Login from "./Login";
 import './Welcome.css';
 
-function Welcome(){
+function Welcome({onLoginSuccess}){
     const [isJoin, setIsJoin] = useState(false);
 
     const clickSignIn = ()=>{
@@ -12,10 +12,13 @@ function Welcome(){
     const joinEnd = ()=>{
         setIsJoin(false);
     }
+    const onLogin = (id)=>{
+        onLoginSuccess(id);
+    }
 
     return (
         <div className="welcome-page background-theme">
-            {!isJoin ? <Login onClickSignIn={clickSignIn}></Login> : null}
+            {!isJoin ? <Login onClickSignIn={clickSignIn} onLogin={onLogin}></Login> : null}
             {isJoin ? <Join onJoinEnd={joinEnd}></Join> : null}
         </div>
     );

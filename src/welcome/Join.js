@@ -57,16 +57,20 @@ function Join({onJoinEnd}){
             return;
         }
 
-        const param = {
-            url : "signin",
-            body : {id, pw}
-        };
-        UT.request(param, ({result})=>{
-            if(result.length === 0){
-                UT.alert(`${id} is not exist.`);
-            }else{
-                UT.alert(result[0].name);
-            }
+        UT.confirm("Would you like to register?", ()=>{
+            const param = {
+                url : "signin",
+                body : {id, pw}
+            };
+            UT.request(param, ({result})=>{
+                if(result.length === 0){
+                    UT.alert(`${id} is not exist.`);
+                }else{
+                    UT.alert("You are registed.", ()=>{
+                        onJoinEnd();
+                    });
+                }
+            });
         });
     }
 
@@ -76,7 +80,7 @@ function Join({onJoinEnd}){
     }, []);
 
     const style = {
-        top : "-70px"
+        top : "-60px"
     }
 
     return (
@@ -94,7 +98,7 @@ function Join({onJoinEnd}){
             </div>
             <div className="login-button" data-name="signIn" onClick={onClick}  style={style}>Sing in</div>
 
-            <div className="warn-msg" ref={ref_warn} style={{top : "-65px"}}>{warnMsg}</div>
+            <div className="warn-msg" ref={ref_warn} style={{top : "-55px"}}>{warnMsg}</div>
 
             <div className="signin-text" style={{top : "-45px"}}>
                 <span data-name="sign" onClick={onClick}>Back</span>

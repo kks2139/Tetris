@@ -18,51 +18,51 @@ app.get('/', (req, res) => {
 
 app.post('/api/login', (req, res)=>{
     doQuery('login', req.body).then( obj =>{
-        if(obj.error){
-            res.send("Error Occured.");
-        }else{
-            res.send(obj.rows);
+        const result = {
+            error : obj.error ? "Error occured." : "",
+            rows : obj.rows
         }
+        res.send(result);
     });
 });
 
 app.post('/api/signin', (req, res)=>{
     doQuery('signin', req.body).then( obj =>{
-        if(obj.error){
-            res.send("Error Occured.");
-        }else{
-            res.send(obj.rows);
+        const result = {
+            error : obj.error ? "Error occured." : "",
+            rows : obj.rows
         }
+        res.send(result);
     });
 })
 
 app.post('/api/getRankList', (req, res) => { 
     doQuery('getRankList', req.body).then( obj =>{
-        if(obj.error){
-            res.send("Error Occured.");
-        }else{
-            res.send(obj.rows);
+        const result = {
+            error : obj.error ? "Error occured." : "",
+            rows : obj.rows
         }
+        res.send(result);
     });
 });
 
 app.post('/api/saveScore', (req, res) => { 
     doQuery('saveScore', req.body).then( obj =>{
-        if(obj.error){
-            res.send("Error Occured.");
-        }else{
-            res.send(obj.rows);
+        const result = {
+            error : obj.error ? "Error occured." : "",
+            rows : obj.rows
         }
+        res.send(result);
     });
 });
 
 app.post('/api/getHistory', (req, res) => { 
     doQuery('getHistory', req.body).then( obj =>{
-        if(obj.error){
-            res.send("Error Occured.");
-        }else{
-            res.send(obj.rows);
+        const result = {
+            error : obj.error ? "Error occured." : "",
+            rows : obj.rows
         }
+        res.send(result);
     });
 });
 

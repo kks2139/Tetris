@@ -37,8 +37,8 @@ export const UT = {
         })
         .then(res => {
             const result = {
-                status : res.errno ? -1 : 200,
-                result : res
+                errMsg : res.error,
+                result : res.rows
             }
             if(callback && typeof callback === "function") callback(result);
         })
@@ -84,33 +84,53 @@ export const UT = {
         }
     },
 
-    alert : (msg, callback)=>{
+    alert : (msg, callback_yes)=>{
+        UT.makeDialog(false, msg, [callback_yes]);
+    },
+
+    confirm : (msg, callback_yes, Callback_no)=>{
+        UT.makeDialog(true, msg, [callback_yes, Callback_no]);
+    },
+
+    makeDialog : (isConfirm, msg, [yes, no])=>{
         const modalRoot = document.querySelector('#modal');
         if(document.querySelectorAll('div.modal-back').length !== 0) return;
         const back = document.createElement('div');
         const dialog = document.createElement('div'); // alert창
         const msgBox = document.createElement('div'); // 메시지박스
         const btnBox = document.createElement('div'); // 버튼박스
-        const okBtn = document.createElement('div'); // 확인버튼
+        const yesBtn = document.createElement('div'); // 확인버튼
         
         back.classList.add('modal-back');
         dialog.classList.add('dialog');
         msgBox.classList.add('dialog-msg-box');
         btnBox.classList.add('dialog-btn-box');
-        okBtn.classList.add('dialog-btn-ok');
-
+        yesBtn.classList.add('dialog-btn-1');
+        
         msgBox.textContent = msg;
-        okBtn.textContent = "OK";
-        okBtn.onclick = (e)=>{
-            if(callback && typeof callback === "function") callback();
+        yesBtn.textContent = "Yes";
+        yesBtn.onclick = (e)=>{
             e.target.onclick = null;
             modalRoot.removeChild(modalRoot.firstChild);
+            if(yes && typeof yes === "function") yes();
         }
-
+        
         modalRoot.appendChild(back);
         back.appendChild(dialog);
         dialog.appendChild(msgBox);
         dialog.appendChild(btnBox);
-        btnBox.appendChild(okBtn);
+        btnBox.appendChild(yesBtn);
+
+        if(isConfirm){
+            const noBtn = document.createElement('div');
+            noBtn.classList.add('dialog-btn-1');
+            noBtn.textContent = "No";
+            noBtn.onclick = (e)=>{
+                e.target.onclick = null;
+                modalRoot.removeChild(modalRoot.firstChild);
+                if(no && typeof no === "function") no();
+            }
+            btnBox.appendChild(noBtn);
+        }
     }
 }

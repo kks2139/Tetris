@@ -16,10 +16,14 @@ const sqlMap = {
            and pw = ? 
     `,
     signin : `
-        select count(*)
-          from user
-         where name = ?
-           and pw = ? 
+        insert into user 
+        (
+            name,
+            pw
+        ) values (
+            ?,
+            ?
+        )
     `,
     getRankList : `
         select a.name, max(a.score) score, a.level, a.reg_dt 
@@ -64,11 +68,12 @@ const doQuery = async (sqlId, p)=>{
             break;
         case 'saveScore': params = [p.name, p.score, p.level, p.id];
             break;
-        case 'getHistory': params = [p.id];
+        case 'getHistory': params = [p.name];
             break;
     }
+
+    const conn = await db.getConnection(async c => c);
     try{
-        const conn = await db.getConnection(async c => c);
         await conn.beginTransaction(); // 트랜잭션 시작
 
         const[rows] = await conn.query(sqlMap[sqlId], params);

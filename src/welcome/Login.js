@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { UT } from '../util/util';
 
-function Login({onClickSignIn}){
+function Login({onClickSignIn, onLogin}){
     const [id, setId] = useState("");
     const [pw, setPw] = useState("");
     const [warnMsg, setWarnMsg] = useState("");
@@ -47,9 +47,9 @@ function Login({onClickSignIn}){
         };
         UT.request(param, ({result})=>{
             if(result.length === 0){
-                UT.alert(`${id} is not exist.`);
+                UT.alert(`Wrong User Name or Password.`);
             }else{
-                UT.alert(result[0].name);
+                onLogin(id);
             }
         });
     }
