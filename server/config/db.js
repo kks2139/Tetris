@@ -9,7 +9,7 @@ const db = mysql.createPool({
 });
 
 const sqlMap = {
-    login : `
+    getUser : `
         select name
           from user
          where name = ?
@@ -60,7 +60,7 @@ const doQuery = async (sqlId, p)=>{
     var params = null, rows = null, error = false;
      
     switch(sqlId){
-        case 'login': params = [p.id, p.pw];
+        case 'getUser': params = [p.id, p.pw];
             break;
         case 'signin': params = [p.id, p.pw];
             break;

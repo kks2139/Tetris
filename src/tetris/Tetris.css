@@ -1,13 +1,37 @@
-
 .frame {
-    border: 15px solid var(--theme-color);
+    /* border: 15px solid var(--theme-color); */
     width: 100%;
     display: flex;
 }
+
+.top-menu-bar {
+    background-color: white;
+    position: fixed;
+    width: 100%;
+    height: 45px;
+    display: flex;
+    font-size: 19px;
+    font-weight: 500;
+    box-shadow: var(--theme-shadow);
+    filter: blur(0);
+    z-index: 120;
+}
+.top-menu-bar div {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.top-menu-text {
+    height: 30px;
+    line-height: 30px;
+    margin: 0 5px;
+}
+
 .menu-box {
     width: 100%;
     text-align: center;
-    padding: 10vh;
+    margin-top: 8vh;
+    padding: 2vh;
 }
 .title {
     font-size: 80px;
@@ -21,8 +45,8 @@
     padding: 3px;
     width: 200px;
     height:50px;
-    border: 2px solid white;
-    border-radius: 15px;
+    /* border: 2px solid white; */
+    border-radius: 55px;
     line-height: 40px;
     background-color: rgb(34, 34, 34);
     transition: background-color 0.3s, 
@@ -33,9 +57,10 @@
     background-color: var(--theme-color);
     color: #202124 !important;
     width: 230px;
+    box-shadow: var(--theme-shadow);
 }
 .label1:active {
-    background-color: rgb(0, 163, 73);
+    background-color: var(--theme-color2);
 }
 .label2 {
     font-size: 45px;
@@ -48,16 +73,16 @@
     font-size: 30px;
     font-weight: bold;
     margin: 12px 30px 0 0;
-    border: 1px solid;
-    border-radius: 7px;
+    border: 1px solid var(--theme-color);
+    background-color: white;
+    border-radius: 57px;
     padding: 0 20px;
     width: 200px;
     height: 45px;
     transition: border 0.2s, color 0.2s;
 }
 .label3:hover {
-    border: 1px solid var(--theme-color);
-    /* color: rgb(214, 114, 0); */
+    box-shadow: var(--theme-shadow);
     cursor: pointer;
 }
 .level-box {
@@ -81,9 +106,9 @@
 }
 
 .body-frame {
-    border: 7px solid rgb(18, 155, 80);
-    border-radius: 6px;
-    margin: auto;
+    border: 7px solid var(--theme-color);
+    border-radius: 16px;
+    margin: 10vh;
     filter: blur(0);
     transition: filter 1.5s;
 }
@@ -168,15 +193,13 @@
     height: 50px;
 }
 .combo {
-    position: relative;
-    left: 27%;
-    top: 4px;
+    position: fixed;
+    left: 50%;
+    top: 10%;
+    transform: translateX(-50%);
     font-weight: bold;
     font-size: 30px;
-    text-shadow: 5px 4px 3px #616161;
-    /* color: yellow; */
     opacity: .9;
-    /* transform: rotate(15deg); */
     transition: opacity 0.5s;
     display: flex;
     z-index: 100;
@@ -191,9 +214,10 @@
     font-weight: bold;
     font-size: 62px;
     text-align: center;
-    text-shadow: 4px 6px 3px #292929;
-    position: absolute;
-    top: 25%;
+    position: fixed;
+    left: 50%;
+    top: 30%;
+    transform: translateX(-50%);
     z-index: 20;
     opacity: 0;
     transition: opacity 2s;
@@ -225,7 +249,10 @@
     transition: border .9s, 
                 background-color .9s;
 }
-.rank-row:hover {cursor: pointer;}
+.rank-row:hover {
+    cursor: pointer;
+    box-shadow: var(--theme-shadow);
+}
 .rank-rank {
     width: 50px;
 }
@@ -241,36 +268,36 @@
 .rank-header {
     margin-top: 30px;
     /* margin: 30px 0 0 50px; */
-    font-size: 20px;
+    font-size: 23px;
     font-weight: bold;
     display: flex;
     position: relative;
     left: 50%;
     width: 640px;
-    color: rgb(104, 250, 255);
+    color: var(--theme-color);
     /* border: 1px solid; */
     transform: translateX(-50%);
     text-align: center;
 }
 .rank-top {
     border: 1px solid #ffd900 !important;
-    background-color: rgb(0, 201, 151);
+    background-color: var(--theme-color2);
 }
 
 .rank-his-box {
-    height: 49vh;
+    height: 50vh;
     width: 370px;
     overflow-y: auto;
     border-bottom: 5px solid #5e5e5e;
     border-radius: 6px;
 }
 .rank-his-header {
-    margin-top: 30px;
+    margin: 30px auto 0 auto;
     font-size: 20px;
     width: 330px;
-    /* font-weight: bold; */
+    font-weight: bold;
     display: flex;
-    color: rgb(104, 250, 255);
+    color: var(--theme-color);
 }
 .rank-his-row {
     border: 1px solid var(--theme-color);
@@ -284,11 +311,16 @@
     font-size: 15px;
 }
 .btn-x {
+    width: 35px;
+    border-radius: 8px;
     font-size: 23px;
-    color: #cdcdcd;
+    color: var(--inactive-color);
     /* font-weight: bold; */
 }
-.btn-x:hover {cursor: pointer;}
+.btn-x:hover {
+    cursor: pointer;
+    box-shadow: var(--theme-shadow);
+}
 
 .input-box {
     padding-top: 10px;

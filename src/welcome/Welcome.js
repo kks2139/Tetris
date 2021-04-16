@@ -17,7 +17,7 @@ function Welcome({onLoginSuccess}){
     }
 
     return (
-        <div className="welcome-page background-theme">
+        <div className="background-theme">
             {!isJoin ? <Login onClickSignIn={clickSignIn} onLogin={onLogin}></Login> : null}
             {isJoin ? <Join onJoinEnd={joinEnd}></Join> : null}
         </div>

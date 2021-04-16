@@ -62,9 +62,9 @@ function Join({onJoinEnd}){
                 url : "signin",
                 body : {id, pw}
             };
-            UT.request(param, ({result})=>{
-                if(result.length === 0){
-                    UT.alert(`${id} is not exist.`);
+            UT.request(param, (result)=>{
+                if(result.errMsg){
+                    UT.alert(`'${id}' is already exist`);
                 }else{
                     UT.alert("You are registed.", ()=>{
                         onJoinEnd();

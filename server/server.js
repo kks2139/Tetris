@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/api/login', (req, res)=>{
-    doQuery('login', req.body).then( obj =>{
+    doQuery('getUser', req.body).then( obj =>{
         const result = {
             error : obj.error ? "Error occured." : "",
             rows : obj.rows
@@ -27,12 +27,18 @@ app.post('/api/login', (req, res)=>{
 });
 
 app.post('/api/signin', (req, res)=>{
-    doQuery('signin', req.body).then( obj =>{
-        const result = {
-            error : obj.error ? "Error occured." : "",
-            rows : obj.rows
+    doQuery('getUser', req.body).then( user =>{
+        if(user.rows.length > 0){
+            res.send({error : "Already exsit."});
+        }else{
+            doQuery('signin', req.body).then( obj =>{
+                const result = {
+                    error : obj.error ? "Error occured." : "",
+                    rows : obj.rows
+                }
+                res.send(result);
+            })
         }
-        res.send(result);
     });
 })
 

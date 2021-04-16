@@ -3,6 +3,7 @@ import FirstMenu from './FirstMenu';
 import PopupMenu from './PopupMenu';
 import MainBody from './MainBody';
 import InputBox from './InputBox';
+import TopMenu from './TopMenu';
 import {UT} from '../util/util';
 
 function Tetris(){
@@ -81,6 +82,7 @@ function Tetris(){
     }
     return(
         <div className="frame">
+            <TopMenu></TopMenu>
             {hidePop ? null : <PopupMenu onButtonClick={popupClicked}></PopupMenu>}
             {hideMenu ? null : <FirstMenu onSelect={levelSelected} clickRanking={clickRanking} level={level} onRefresh={onRefresh}></FirstMenu>}
             {hideBody ? null : <MainBody size={bodySize} level={currLevel} onRecord={onRecord} onRestart={onRestart} onBackToMenu={onBackToMenu} recordDone={recordDone}></MainBody>}

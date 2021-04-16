@@ -47,7 +47,7 @@ function Login({onClickSignIn, onLogin}){
         };
         UT.request(param, ({result})=>{
             if(result.length === 0){
-                UT.alert(`Wrong User Name or Password.`);
+                UT.alert(`Check User Name or Password again.`);
             }else{
                 onLogin(id);
             }
