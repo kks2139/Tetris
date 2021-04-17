@@ -72,3 +72,12 @@ app.post('/api/getHistory', (req, res) => {
     });
 });
 
+app.post('/api/getTopRanker', (req, res) => { 
+    doQuery('getTopRanker', req.body).then( obj =>{
+        const result = {
+            error : obj.error ? "Error occured." : "",
+            rows : obj.rows
+        }
+        res.send(result);
+    });
+});

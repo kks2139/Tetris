@@ -299,7 +299,7 @@ function removeLayer(layer, body, size){
     }
 }
 
-function MainBody({size = 10, level = "Easy", onBackToMenu, onRestart, onRecord, recordDone}){
+function MainBody({size = 10, level = "Easy", onBackToMenu, onRestart, onRecord}){
     const body = useRef();
     const idx = Math.floor(Math.random() * 10 % 7 + 1);
     const [blockCount, setBlockCount] = useState(0);
@@ -366,10 +366,6 @@ function MainBody({size = 10, level = "Easy", onBackToMenu, onRestart, onRecord,
         if(labelRef.current.classList.contains("label-disabled")) return;
         onRecord({score, level});
     }
-
-    useEffect(()=>{
-        if(recordDone) labelRef.current.classList.add("label-disabled");
-    }, [recordDone]);
 
     useEffect(()=>{
         // 꼭대기의 중앙부분 찼는지 확인

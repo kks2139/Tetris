@@ -4,6 +4,7 @@ import PopupMenu from './PopupMenu';
 import MainBody from './MainBody';
 import InputBox from './InputBox';
 import TopMenu from './TopMenu';
+import FootNotice from './FootNotice';
 import {UT} from '../util/util';
 
 function Tetris(){
@@ -11,10 +12,9 @@ function Tetris(){
     const [hideMenu, setHideMenu] = useState(false);
     const [hideBody, setHideBody] = useState(true);
     const [hideInput, setHideInput] = useState(true);
-    const [recordDone, setRecordDone] = useState(false);
     const [result, setResult] = useState({score : 0, lvl : ""});
 
-    const [bodySize, setBodySize] = useState(32);
+    const [bodySize, setBodySize] = useState(30);
     const level = ["Easy", "Normal", "Hard", "Extreme"];
     const [currLevel, setCurrLevel] = useState("");
 
@@ -85,8 +85,9 @@ function Tetris(){
             <TopMenu></TopMenu>
             {hidePop ? null : <PopupMenu onButtonClick={popupClicked}></PopupMenu>}
             {hideMenu ? null : <FirstMenu onSelect={levelSelected} clickRanking={clickRanking} level={level} onRefresh={onRefresh}></FirstMenu>}
-            {hideBody ? null : <MainBody size={bodySize} level={currLevel} onRecord={onRecord} onRestart={onRestart} onBackToMenu={onBackToMenu} recordDone={recordDone}></MainBody>}
+            {hideBody ? null : <MainBody size={bodySize} level={currLevel} onRecord={onRecord} onRestart={onRestart} onBackToMenu={onBackToMenu}></MainBody>}
             {hideInput ? null : <InputBox info={result} onQuit={onQuit} onConfirm={onConfirm}></InputBox>}
+            <FootNotice></FootNotice>
         </div>
     );
 }

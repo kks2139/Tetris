@@ -53,6 +53,13 @@ const sqlMap = {
           from score
          where name = ?
       order by reg_dt desc
+    `,
+    getTopRanker : `
+        select name
+             , level
+             , Max(score) as max_score 
+         from score
+     group by level;
     `
 };
 
@@ -69,6 +76,8 @@ const doQuery = async (sqlId, p)=>{
         case 'saveScore': params = [p.name, p.score, p.level, p.id];
             break;
         case 'getHistory': params = [p.name];
+            break;
+        case 'getTopRanker': params = [];
             break;
     }
 
