@@ -21,6 +21,7 @@ function FirstMenu({onSelect, level = [], onRefresh}){
         setCls("label2");
         setIsClicked(true);
         timerId.current = setInterval(()=>{
+            if(!divRef.current) return;
             const r1 = Math.random() * 1000 % 256;
             const r2 = Math.random() * 1000 % 256;
             const r3 = Math.random() * 1000 % 256;

@@ -44,7 +44,7 @@ const sqlMap = {
             ?,
             ?,
             ?,
-            ?
+            ?,
             date_format(now(), '%Y-%m-%d %H:%i:%s')
         )
     `,
@@ -55,11 +55,13 @@ const sqlMap = {
       order by reg_dt desc
     `,
     getTopRanker : `
-        select name
-             , level
-             , Max(score) as max_score 
-         from score
-     group by level;
+        select a.name
+             , a.level
+             , Max(a.score) as max_score 
+         from score a
+         inner join user b
+            on a.name = b.name
+      group by level;
     `
 };
 

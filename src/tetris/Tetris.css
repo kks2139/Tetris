@@ -110,10 +110,10 @@
 .body-frame {
     border: 7px solid var(--theme-color2);
     border-radius: 16px;
-    margin-top: 10vh;
+    margin-top: 8vh;
     box-shadow: 0px 0px 8px 2px var(--inactive-color);
     filter: blur(0);
-    transition: filter 1.5s;
+    transition: filter 2s;
 }
 .active {}
 .non-active {}
@@ -199,7 +199,7 @@
 .score {
     font-weight: 500;
     font-size: 20px;
-    margin-top: 10vh;
+    margin-top: 9vh;
     height: 50px;
     color: var(--theme-color);
 }
@@ -223,7 +223,7 @@
     text-shadow: 0 0 5px var(--inactive-color);
 }
 .game-over {
-    font-weight: bold;
+    font-weight: 500;
     font-size: 62px;
     text-align: center;
     position: fixed;
@@ -245,8 +245,8 @@
     height: 50vh;
     width: 700px;
     overflow-y: auto;
-    border-bottom: 5px solid #5e5e5e;
-    border-radius: 6px;
+    border-bottom: 2px solid #5e5e5e;
+    border-radius: 5px;
 }
 .rank-row {
     border: 1px solid var(--theme-color);
@@ -300,8 +300,8 @@
     height: 50vh;
     width: 370px;
     overflow-y: auto;
-    border-bottom: 5px solid #5e5e5e;
-    border-radius: 6px;
+    border-bottom: 2px solid #5e5e5e;
+    border-radius: 5px;
 }
 .rank-his-header {
     margin: 30px auto 0 auto;
@@ -324,14 +324,12 @@
 }
 .btn-x {
     width: 35px;
-    border-radius: 8px;
     font-size: 23px;
     color: var(--inactive-color);
-    /* font-weight: bold; */
 }
 .btn-x:hover {
     cursor: pointer;
-    box-shadow: var(--theme-shadow);
+    text-shadow: 0px 0px 2px gray;
 }
 
 .input-box {
@@ -404,4 +402,27 @@
     background-color: var(--theme-color2);
     /* box-shadow: var(--theme-shadow); */
     z-index: 1;
+}
+
+.mainbody-side-btn {
+    position: relative;
+    font-size: 20px;
+    left: 110%;
+    top: -15%;
+    transform: translateX(0);
+    width: 90px;
+    height: 40px;
+    line-height: 35px;
+    text-align: center;
+    transition: left .9s, top .9s, transform .9s,
+                width .9s, height .9s;
+}
+.mainbody-side-btn-move {
+    left: 50%;
+    top: -40%;
+    width: 150px;
+    height: 50px;
+    font-size: 23px;
+    line-height: 45px;
+    transform: translateX(-50%);
 }

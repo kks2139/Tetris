@@ -90,10 +90,10 @@ function getBlockRect(block){
     temp1.sort((a, b) => a.getClientRects()[0].top - b.getClientRects()[0].top);
     temp2.sort((a, b) => a.getClientRects()[0].left - b.getClientRects()[0].left);
 
-    const top = temp1.pop().getClientRects()[0].top;
-    const minLeft = temp2[0].getClientRects()[0].left;
-    const maxLeft = temp2.pop().getClientRects()[0].left;
-    const bodyInfo = document.querySelector('#body').getClientRects()[0];
+    const top = temp1.pop().getClientRects()[0].top || 0;
+    const minLeft = temp2[0].getClientRects()[0].left || 0;
+    const maxLeft = temp2.pop().getClientRects()[0].left || 0;
+    const bodyInfo = document.querySelector('#body').getClientRects()[0] || 0;
 
     return {top, minLeft, maxLeft, bodyInfo};
 }
@@ -104,6 +104,7 @@ function isTouched(rotate, block, size, key){
     const h = 20 * size;
 
     const {top, minLeft, maxLeft, bodyInfo} = getBlockRect(block);
+
 
     if(rotate){ // 회전시 삐져나온부분 체크
         const bw = 7; // body 의 border width
@@ -299,7 +300,7 @@ function removeLayer(layer, body, size){
     }
 }
 
-function MainBody({size = 10, level = "Easy", onBackToMenu, onRestart, onRecord}){
+function MainBody({size = 10, level = "Easy", onGameOver}){
     const body = useRef();
     const idx = Math.floor(Math.random() * 10 % 7 + 1);
     const [blockCount, setBlockCount] = useState(0);
@@ -334,6 +335,7 @@ function MainBody({size = 10, level = "Easy", onBackToMenu, onRestart, onRecord}
                     combo_limit.current = 3;
                 }
                 combo_timerId.current = setInterval(()=>{
+                    if(!combo_div.current) return;
                     if(combo_limit.current == 3) combo_div.current.style.opacity = 0.9;
                     combo_limit.current--;    
                     
@@ -356,21 +358,12 @@ function MainBody({size = 10, level = "Easy", onBackToMenu, onRestart, onRecord}
         }
     };
 
-    const backToMenuClick = (e)=>{
-        onBackToMenu();
-    }
-    const restartClick = (e)=>{
-        onRestart(level);
-    }
-    const recordClick = (e)=>{
-        if(labelRef.current.classList.contains("label-disabled")) return;
-        onRecord({score, level});
-    }
-
     useEffect(()=>{
         // 꼭대기의 중앙부분 찼는지 확인
         if(isUnderCelling(body.current, size)){
             // alert("Game Over");
+
+            onGameOver({score, level});
 
             body.current.style.filter = "blur(6px)";
             overRef.current.hidden = false;
@@ -432,7 +425,7 @@ function MainBody({size = 10, level = "Easy", onBackToMenu, onRestart, onRecord}
     };
 
     return(
-        <div style={{margin: "auto"}}>
+        <div>
             <div style={{height : "40px"}}>
                 <div style={{display : "flex"}}>
                     <div className="score">Score : {score}</div>
@@ -454,9 +447,9 @@ function MainBody({size = 10, level = "Easy", onBackToMenu, onRestart, onRecord}
             </div>
             <div className="game-over" ref={overRef} hidden={true}>
                 Game Over
-                <div class="label3" style={{margin : "20px auto"}} onClick={restartClick}>Restart</div>
+                {/* <div class="label3" style={{margin : "20px auto"}} onClick={restartClick}>Restart</div>
                 <div class="label3" style={{margin : "20px auto"}} onClick={backToMenuClick}>Back to menu</div>
-                <div class="label3" style={{margin : "20px auto"}} onClick={recordClick} ref={labelRef}>Record</div>
+                <div class="label3" style={{margin : "20px auto"}} onClick={recordClick} ref={labelRef}>Record</div> */}
             </div>
             <div id="body" className="body-frame" ref={body} style={bodySize}></div>
         </div>
