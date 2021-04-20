@@ -1,5 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import RankingBox from './RankingBox';
+import SearchBar from './SearchBar';
+
 import './Tetris.css';
 
 
@@ -10,8 +12,11 @@ function FirstMenu({onSelect, level = [], onRefresh}){
     const [isClicked, setIsClicked] = useState(false);
     const timerId = useRef("0");
     const divRef = useRef();
+    const ref_title = useRef();
     const [hideRank, setHideRank] = useState(true);
     const [hideMenu, setHideMenu] = useState(false);
+    const [userNm, setUserNm] = useState({name : ""});
+
 
     level = level.concat(["Back"]);
 
@@ -37,10 +42,15 @@ function FirstMenu({onSelect, level = [], onRefresh}){
     const clickRanking = ()=>{
         setHideMenu(true);
         setHideRank(false);
+        ref_title.current.classList.toggle("title-min");
     }
     const onBack = ()=>{
         setHideMenu(false);
         setHideRank(true);
+        ref_title.current.classList.toggle("title-min");
+    }
+    const onSearch = (userNm)=>{
+        setUserNm({name : userNm});
     }
 
     useEffect(()=>{
@@ -50,7 +60,7 @@ function FirstMenu({onSelect, level = [], onRefresh}){
     return(
         <>
             <div className="menu-box">
-                <div className="title">TETRIS</div>
+                <div className="title" ref={ref_title}>TETRIS</div>
                 <div hidden={hideMenu}>
                     <div style={{marginTop : "15vh"}}>
                         <div className={cls} onClick={clickStart} ref={divRef}>{menu1}</div>
@@ -63,7 +73,12 @@ function FirstMenu({onSelect, level = [], onRefresh}){
                     </div>
                 </div>
                 
-                {hideRank ? null : <RankingBox onBack={onBack}></RankingBox>}
+                {hideRank ? null : 
+                    <>
+                        <SearchBar onSearch={onSearch}></SearchBar>
+                        <RankingBox onBack={onBack} searchText={userNm}></RankingBox>
+                    </>
+                }
 
             </div>
         </>

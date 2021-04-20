@@ -3,14 +3,20 @@ import RankingList from './RankingList';
 import RankingHisList from './RankingHisList';
 import {UT} from '../util/util';
 
-function RankingBox({onBack}){
+function RankingBox({onBack, searchText}){
     const [rankList, setRankList] = useState([]);
     const [rankHisList, setRankHisList] = useState([]);
     const [userName, setUserName] = useState("");
     const wrapperRef = useRef();
 
     const getRankList = ()=>{
-        UT.request({url : "getRankList"}, (res)=>{
+        const param = {
+            url : "getRankList",
+            body : {
+                name : searchText.name
+            }
+        };
+        UT.request(param, (res)=>{
             const sorted = res.result.sort((a, b)=> b.score - a.score);
             setRankList(sorted);
         });
@@ -35,7 +41,7 @@ function RankingBox({onBack}){
 
     useEffect(()=>{
         getRankList();
-    }, []);
+    }, [searchText]);
     
     return (
         <>
