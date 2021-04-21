@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { UT } from '../util/util';
+import { UT } from '../../util/util';
 
 function Join({onJoinEnd}){
     const [id, setId] = useState("");

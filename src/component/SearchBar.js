@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function SearchBar({onSearch}){
+function SearchBar({onSearch, style = {}}){
     const [text, setText] = useState("");
 
     const onChange = (e)=>{
@@ -14,7 +14,7 @@ function SearchBar({onSearch}){
     }
 
     return (
-        <div>
+        <div style={style}>
             <div className="search-bar">
                 <input className="input-search" onChange={onChange} onKeyDown={onKeyDown} value={text} placeholder="Search by user name"></input>
                 <div className="search-btn" onClick={onClick}>➤</div>

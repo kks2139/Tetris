@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import RankingList from './RankingList';
 import RankingHisList from './RankingHisList';
-import {UT} from '../util/util';
+import {UT} from '../../util/util';
 
-function RankingBox({onBack, searchText}){
+function RankingBox({onBack, searchText, filterValue}){
     const [rankList, setRankList] = useState([]);
     const [rankHisList, setRankHisList] = useState([]);
     const [userName, setUserName] = useState("");
@@ -13,7 +13,8 @@ function RankingBox({onBack, searchText}){
         const param = {
             url : "getRankList",
             body : {
-                name : searchText.name
+                name : searchText.name,
+                level : filterValue
             }
         };
         UT.request(param, (res)=>{
@@ -41,7 +42,7 @@ function RankingBox({onBack, searchText}){
 
     useEffect(()=>{
         getRankList();
-    }, [searchText]);
+    }, [searchText, filterValue]);
     
     return (
         <>

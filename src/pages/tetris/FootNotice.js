@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { UT } from '../util/util';
+import { UT } from '../../util/util';
 
 function FootNotice(){
     const [topList, setTopList] = useState([]);

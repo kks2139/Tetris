@@ -94,7 +94,7 @@ function getBlockRect(block){
     const minLeft = temp2[0].getClientRects()[0].left || 0;
     const maxLeft = temp2.pop().getClientRects()[0].left || 0;
     const bodyInfo = document.querySelector('#body').getClientRects()[0] || 0;
-
+    
     return {top, minLeft, maxLeft, bodyInfo};
 }
 
@@ -102,9 +102,7 @@ function getBlockRect(block){
 function isTouched(rotate, block, size, key){
     const w = 10 * size;
     const h = 20 * size;
-
     const {top, minLeft, maxLeft, bodyInfo} = getBlockRect(block);
-
 
     if(rotate){ // 회전시 삐져나온부분 체크
         const bw = 7; // body 의 border width
@@ -317,6 +315,7 @@ function MainBody({size = 10, level = "Easy", onGameOver}){
 
     const moveDownFunc = ()=>{
         const curr = document.querySelector('div.active');
+        if(!curr) return;
         if(isTouched(false, curr, size, "s") || collision(false, curr, size, "s")){ // 아랫쪽 박스 경계선 닿거나, 다른블록과 닿으면 비활성 처리
             clearInterval(fallRef.current);
             fallRef.current = '';

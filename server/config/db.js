@@ -31,6 +31,7 @@ const sqlMap = {
     inner join user b
             on a.name = b.name
         where b.name like ?
+          and a.level like ?
         group by name;
     `,
     saveScore : `
@@ -74,7 +75,7 @@ const doQuery = async (sqlId, p)=>{
             break;
         case 'signin': params = [p.id, p.pw];
             break;
-        case 'getRankList': params = [p.name ? `%${p.name}%` : '%'];
+        case 'getRankList': params = [p.name ? `%${p.name}%` : '%', p.level ? `${p.level}` : '%'];
             break;
         case 'saveScore': params = [p.name, p.score, p.level, p.id];
             break;

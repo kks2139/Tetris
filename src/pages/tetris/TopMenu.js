@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import {SessionContext} from '../App';
+import {SessionContext} from '../../App';
 
 function TopMenu(){
     const context = useContext(SessionContext);

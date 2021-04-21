@@ -228,3 +228,73 @@ input {
     animation-timing-function: linear;
     animation-iteration-count: infinite;
 }
+
+.search-wrap {
+    box-shadow: 0px 0px 8px 0px gray;
+}
+.search-bar {
+    display: flex;
+    width: 240px;
+    /* position: relative;
+    left: 50%;
+    transform: translateX(-50%); */
+    
+}
+.input-search {
+    caret-color: var(--theme-color);
+    border: 1px solid var(--inactive-color);
+    /* border-radius: 20px; */
+    padding: 7px 7px 7px 15px;
+    width: 200px;
+    height: 30px;
+    color: var(--inactive-color);
+    box-sizing: border-box;
+}
+.input-search:hover {
+    border: 1px solid var(--theme-color2);
+    box-shadow: 0px 0px 8px -2px var(--theme-color2);
+}
+.input-search:focus {
+    border: 1px solid var(--theme-color2);
+    box-shadow: 0px 0px 8px -2px var(--theme-color2);
+}
+.input-search::placeholder {
+    color: var(--inactive-color);
+    padding: 2px;
+}
+.search-btn {
+    height: 30px;
+    width: 40px;
+    text-align: center;
+    color: white;
+    background-color: var(--inactive-color);
+    line-height: 28px;
+}
+.search-btn:hover {
+    background-color: var(--theme-color2);
+    color: white;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 0px var(--theme-color2);
+}
+.search-btn:active {
+    background-color: #92d100;
+    cursor: pointer;
+}
+
+.combobox {
+    width: 100px;
+    height: 30px;
+    padding: 5px;
+    border: 1px solid var(--inactive-color);
+    color: var(--inactive-color);
+    box-sizing: border-box;
+}
+.combobox:hover {
+    cursor: pointer;
+    border: 1px solid var(--theme-color2);
+    box-shadow: 0px 0px 8px -2px var(--theme-color2);
+}
+.combobox:focus {
+    border: 1px solid var(--theme-color2);
+    box-shadow: 0px 0px 8px -2px var(--theme-color2);
+}

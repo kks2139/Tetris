@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import Tetris from './tetris/Tetris';
+import Tetris from './pages/tetris/Tetris';
 import { UT } from './util/util';
-import Welcome from './welcome/Welcome';
+import Welcome from './pages/welcome/Welcome';
 
 export const SessionContext = React.createContext(null);
 
