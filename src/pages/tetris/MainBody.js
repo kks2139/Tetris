@@ -356,6 +356,41 @@ function MainBody({size = 10, level = "Easy", onGameOver}){
             curr.style.top = Number(curr.style.top.split('px')[0]) + size + "px";
         }
     };
+    const onKeyDown = (e)=>{
+        const curr = document.querySelector('div.active');
+        if(!curr) return;
+        if(isTouched(false, curr, size, e.key) || collision(false, curr, size, e.key)) return;
+
+        var {top, left, transform} = curr.style;
+        top = Number(top.split('px')[0]);
+        left = Number(left.split('px')[0]);
+        transform = transform.split('(').length > 1 ? Number(transform.split('(')[1].split('deg')[0]) : 0;
+        
+        switch(e.key){
+            //case 'w': curr.style.top = (top - size) + "px"; break;
+            case 's': curr.style.top = (top + size) + "px"; break;
+            case 'a': curr.style.left = (left - size) + "px"; break;
+            case 'd': curr.style.left = (left + size) + "px"; break;
+            case 'w':
+                 curr.style.transform = `rotate(${transform + 90}deg)`;
+                 const deg = Number(curr.style.transform.split('(')[1].split('deg')[0]);
+                 if(collision(true, curr, size)) {
+                     curr.style.transform = `rotate(${deg - 90}deg)`;
+                }else{
+                    isTouched(true, curr, size);
+                    // if(curr.classList.contains('block-color1')){
+                    //     isTouched(true, curr, size); // 'ㅡ' 모양은 한번 더 체크한다
+                    // }
+                }
+                break;
+            case 'j':
+                var moveDown = top + size;
+                while(!isTouched(false, curr, size, "s") && !collision(false, curr, size, "s")){
+                    curr.style.top = moveDown + "px";
+                    moveDown += size;
+                }
+        }
+    }
 
     useEffect(()=>{
         // 꼭대기의 중앙부분 찼는지 확인
@@ -375,41 +410,6 @@ function MainBody({size = 10, level = "Easy", onGameOver}){
     }, [blockCount]);
 
     useEffect(()=>{
-        const onKeyDown = (e)=>{
-            const curr = document.querySelector('div.active');
-            if(!curr) return;
-            if(isTouched(false, curr, size, e.key) || collision(false, curr, size, e.key)) return;
-
-            var {top, left, transform} = curr.style;
-            top = Number(top.split('px')[0]);
-            left = Number(left.split('px')[0]);
-            transform = transform.split('(').length > 1 ? Number(transform.split('(')[1].split('deg')[0]) : 0;
-            
-            switch(e.key){
-                //case 'w': curr.style.top = (top - size) + "px"; break;
-                case 's': curr.style.top = (top + size) + "px"; break;
-                case 'a': curr.style.left = (left - size) + "px"; break;
-                case 'd': curr.style.left = (left + size) + "px"; break;
-                case 'w':
-                     curr.style.transform = `rotate(${transform + 90}deg)`;
-                     const deg = Number(curr.style.transform.split('(')[1].split('deg')[0]);
-                     if(collision(true, curr, size)) {
-                         curr.style.transform = `rotate(${deg - 90}deg)`;
-                    }else{
-                        isTouched(true, curr, size);
-                        // if(curr.classList.contains('block-color1')){
-                        //     isTouched(true, curr, size); // 'ㅡ' 모양은 한번 더 체크한다
-                        // }
-                    }
-                    break;
-                case 'j':
-                    var moveDown = top + size;
-                    while(!isTouched(false, curr, size, "s") && !collision(false, curr, size, "s")){
-                        curr.style.top = moveDown + "px";
-                        moveDown += size;
-                    }
-            }
-        }
         document.addEventListener("keydown", onKeyDown);
         return ()=>{ // hide = true 되서 컴포넌트 제거되기 직전에 document 이벤트 해지시킴
             document.removeEventListener("keydown", onKeyDown); 

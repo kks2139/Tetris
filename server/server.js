@@ -81,3 +81,23 @@ app.post('/api/getTopRanker', (req, res) => {
         res.send(result);
     });
 });
+
+app.post('/api/getKeySet', (req, res) => { 
+    doQuery('getKeySet', req.body).then( obj =>{
+        const result = {
+            error : obj.error ? "Error occured." : "",
+            rows : obj.rows
+        }
+        res.send(result);
+    });
+});
+
+app.post('/api/saveKeySet', (req, res) => { 
+    doQuery('saveKeySet', req.body).then( obj =>{
+        const result = {
+            error : obj.error ? "Error occured." : "",
+            rows : obj.rows
+        }
+        res.send(result);
+    });
+});

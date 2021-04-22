@@ -75,7 +75,7 @@ function Login({onClickSignIn, onLogin}){
 
             <div className="signin-text">
                 <span style={{color : "var(--inactive-color)", fontSize : "15px", marginRight : "8px"}}>New here?</span>
-                <span data-name="sign" onClick={onClick}>Sing in</span>
+                <span data-name="sign" onClick={onClick}>Sing up</span>
             </div>
         </div>
     );

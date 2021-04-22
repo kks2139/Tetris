@@ -96,7 +96,7 @@ function Join({onJoinEnd}){
             <div className="input-login" style={style}>
                 <input name="pw_conf" onChange={onChange} onKeyDown={onKeyDown} placeholder="Password Confirm" type="password"></input>
             </div>
-            <div className="login-button" data-name="signIn" onClick={onClick}  style={style}>Sing in</div>
+            <div className="login-button" data-name="signIn" onClick={onClick}  style={style}>Sing up</div>
 
             <div className="warn-msg" ref={ref_warn} style={{top : "-55px"}}>{warnMsg}</div>
 

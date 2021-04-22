@@ -1,8 +1,10 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import RankingBox from './RankingBox';
-import Option from './Option';
+import Setting from './Setting';
 import SearchBar from '../../component/SearchBar';
 import ComboBox from '../../component/ComboBox';
+import { UT } from '../../util/util';
+import {SessionContext} from '../../App';
 import './Tetris.css';
 
 
@@ -15,6 +17,9 @@ function FirstMenu({onSelect, level = [], onRefresh}){
     const [hideOpt, setHideOpt] = useState(true);
     const [userNm, setUserNm] = useState({name : ""});
     const [comboVal, setComboVal] = useState("");
+    const [keyset, setKeyset] = useState("");
+
+    const context = useContext(SessionContext);
 
     const clickStart = (e)=>{
         setIsClicked(true);
@@ -52,6 +57,14 @@ function FirstMenu({onSelect, level = [], onRefresh}){
     }
 
     useEffect(()=>{
+        const param = {
+            url : "getKeySet",
+            body : {name : context.session.id}
+        };
+        UT.request(param, (res)=>{
+            setKeyset(res.result[0].keyset);
+        });
+
         return ()=>{clearInterval(timerId.current)};
     },[]);
 
@@ -72,7 +85,7 @@ function FirstMenu({onSelect, level = [], onRefresh}){
                         <div className="label2" hidden={!isClicked} ref={divRef}>Select level</div>
                         <div className="label1" onClick={clickStart} hidden={isClicked}>Start</div>
                         <div className="label1" onClick={clickRanking} hidden={isClicked}>Ranking</div>
-                        <div className="label1" onClick={clickOption} hidden={isClicked}>Option</div>
+                        <div className="label1" onClick={clickOption} hidden={isClicked}>Setting</div>
                     </div>
                     {isClicked ? <div className="level-box">
                         {level.map((val, idx)=>{
@@ -92,7 +105,7 @@ function FirstMenu({onSelect, level = [], onRefresh}){
                     </>
                 }
 
-                {hideOpt ? null : <Option onBack={onBack}></Option>}
+                {hideOpt ? null : <Setting onBack={onBack} keyset={keyset}></Setting>}
 
             </div>
         </>

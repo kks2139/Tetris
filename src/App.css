@@ -70,12 +70,8 @@ input {
     overflow: hidden;
 }
 .dark {
-    background-color: #202124;
-    color: white;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    overflow: hidden;
+    background-color: #444444;
+    color: white ;
 }
 
 .areaBox {
@@ -297,4 +293,24 @@ input {
 .combobox:focus {
     border: 1px solid var(--theme-color2);
     box-shadow: 0px 0px 8px -2px var(--theme-color2);
+}
+
+.panel-box {
+    /* border: 2px solid var(--theme-color2); */
+    border-radius: 15px;
+    box-shadow: var(--theme-shadow);
+    width: 100%;
+    height: 100%;
+}
+.panel-box > .panel-title {
+    background-color: white;
+    padding: 0 25px;
+    color: var(--theme-color);
+    width: fit-content;
+    font-size: 21px;
+    font-weight: 500;
+    border-radius: 15px;
+}
+.panel-box > .panel-content {
+    padding: 10px;
 }

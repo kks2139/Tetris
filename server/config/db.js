@@ -32,7 +32,7 @@ const sqlMap = {
             on a.name = b.name
         where b.name like ?
           and a.level like ?
-        group by name;
+        group by name
     `,
     saveScore : `
         insert into score 
@@ -63,7 +63,24 @@ const sqlMap = {
          from score a
          inner join user b
             on a.name = b.name
-      group by level;
+    `,
+    getKeySet : `
+        select a.keyset
+         from setting a
+   inner join user b
+           on a.name = b.name
+    `,
+    saveKeySet : `
+        insert into setting(
+            name,
+            keyset
+        ) values (
+            ?,
+            ?
+        )
+        on duplicate key update
+            name = ?,
+            keyset = ?
     `
 };
 
@@ -82,6 +99,10 @@ const doQuery = async (sqlId, p)=>{
         case 'getHistory': params = [p.name];
             break;
         case 'getTopRanker': params = [];
+            break;
+        case 'getKeySet': params = [p.name];
+            break;
+        case 'saveKeySet': params = [p.name, p.keyset, p.name, p.keyset];
             break;
     }
 
