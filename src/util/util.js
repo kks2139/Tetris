@@ -79,8 +79,10 @@ export const UT = {
             }, 80);
 
         }else{
-            clearInterval(window.modalIntervalId);
-            modalRoot.removeChild(modalRoot.firstChild);
+            if(modalRoot.firstChild){
+                clearInterval(window.modalIntervalId);
+                modalRoot.removeChild(modalRoot.firstChild);
+            }
         }
     },
 

@@ -1,10 +1,8 @@
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState} from 'react';
 import RankingBox from './RankingBox';
 import Setting from './Setting';
 import SearchBar from '../../component/SearchBar';
 import ComboBox from '../../component/ComboBox';
-import { UT } from '../../util/util';
-import {SessionContext} from '../../App';
 import './Tetris.css';
 
 
@@ -17,9 +15,6 @@ function FirstMenu({onSelect, level = [], onRefresh}){
     const [hideOpt, setHideOpt] = useState(true);
     const [userNm, setUserNm] = useState({name : ""});
     const [comboVal, setComboVal] = useState("");
-    const [keyset, setKeyset] = useState("");
-
-    const context = useContext(SessionContext);
 
     const clickStart = (e)=>{
         setIsClicked(true);
@@ -57,14 +52,6 @@ function FirstMenu({onSelect, level = [], onRefresh}){
     }
 
     useEffect(()=>{
-        const param = {
-            url : "getKeySet",
-            body : {name : context.session.id}
-        };
-        UT.request(param, (res)=>{
-            setKeyset(res.result[0].keyset);
-        });
-
         return ()=>{clearInterval(timerId.current)};
     },[]);
 
@@ -105,7 +92,7 @@ function FirstMenu({onSelect, level = [], onRefresh}){
                     </>
                 }
 
-                {hideOpt ? null : <Setting onBack={onBack} keyset={keyset}></Setting>}
+                {hideOpt ? null : <Setting onBack={onBack}></Setting>}
 
             </div>
         </>

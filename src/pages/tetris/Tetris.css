@@ -438,8 +438,66 @@
     transform: translateX(-50%);
 }
 
-.option-box {
+.setting-box {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 700px;
     height: 60vh;
     margin-bottom: 30px;
-    /* border: 1px solid var(--theme-color); */
+    overflow-y: auto;
+    box-shadow: 0 0 15px -6px var(--inactive-color);
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.keyset-box {
+    display: flex;
+    text-align: center;
+}
+.keyset-box > div {
+    width: 100%;
+    margin-bottom: 18px;
+    font-weight: 500;
+    font-size: 18px;
+}
+.key-btn {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 100px;
+    font-weight: 500;
+    font-size: 60px;
+    line-height: 80px;
+    border: 1px solid var(--theme-color);
+    border-radius: 15px;
+    margin-top: 10px;
+}
+.key-btn:hover {
+    cursor: pointer;
+    box-shadow: var(--theme-shadow);
+}
+.key-btn-sel {
+    background-color: var(--theme-color2);
+    border: 1px solid var(--theme-color2);
+    box-shadow: var(--theme-shadow);
+    animation-name: blink;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+.setting-btn {
+    display: flex;
+    position: relative;
+    left: 50%;
+    top: 18%;
+    width: fit-content;
+    transform: translateX(-50%);
+}
+.setting-msg {
+    position: relative;
+    font-weight: 500;
+    width: 150px;
+    color: var(--theme-color);
 }
