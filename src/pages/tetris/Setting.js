@@ -23,11 +23,6 @@ function Setting({onBack}){
         const targ = ref_keybox.current.querySelector(`.${selected}`);
         if(targ && targ.classList.contains(selected)){
             const idx = Number(targ.id.split('key')[1]);
-
-            // if(keys.indexOf(e.key) > -1){
-            //     UT.alert(`'${e.key}' is duplicated key.`);
-            //     return;
-            // }
             keys[idx] = e.key;
             setKeys(keys.slice());
         }

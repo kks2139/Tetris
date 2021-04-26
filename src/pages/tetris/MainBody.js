@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 // 블록 생성
-function makeBlock(body, idx, size, lvl, fallRef, moveDownFunc, blockCount){
+function makeBlock(body, idx, size, ref_fall, moveDownFunc, blockCount, speed){
     const block = {
         b1 : [[1,0], [1,0], [1,0], [1,0]], // ㅡ
         b2 : [[1,0], [1,0], [1,1]], // ㄱ
@@ -53,8 +53,7 @@ function makeBlock(body, idx, size, lvl, fallRef, moveDownFunc, blockCount){
     }
 
     // 난이도별 타이머 간격
-    const speed = lvl === "Easy" ? 1000 : lvl === "Normal" ? 600 : lvl === "Hard" ? 300 : 150;   
-    fallRef.current = setInterval(moveDownFunc, speed);
+    ref_fall.current = setInterval(moveDownFunc, speed);
 }
 
 function isUnderCelling(body, size){
@@ -304,10 +303,10 @@ function MainBody({size = 10, level = "Easy", onGameOver}){
     const [blockCount, setBlockCount] = useState(0);
     const [score, setScore] = useState(0);
     const [comboStack, setComboStack] = useState(0);
-    const fallRef = useRef('');
-    const overRef = useRef();
-    const labelRef = useRef();
-    
+
+    const ref_fall = useRef('');
+    const ref_over = useRef();
+    const ref_acc = useRef(0);
 
     const combo_timerId = useRef('');  // timer id
     const combo_limit = useRef(3); // 제한시간
@@ -317,8 +316,8 @@ function MainBody({size = 10, level = "Easy", onGameOver}){
         const curr = document.querySelector('div.active');
         if(!curr) return;
         if(isTouched(false, curr, size, "s") || collision(false, curr, size, "s")){ // 아랫쪽 박스 경계선 닿거나, 다른블록과 닿으면 비활성 처리
-            clearInterval(fallRef.current);
-            fallRef.current = '';
+            clearInterval(ref_fall.current);
+            ref_fall.current = '';
             curr.classList.remove('active');
             curr.classList.add('non-active');
             var currCombo = 1;
@@ -367,7 +366,6 @@ function MainBody({size = 10, level = "Easy", onGameOver}){
         transform = transform.split('(').length > 1 ? Number(transform.split('(')[1].split('deg')[0]) : 0;
         
         switch(e.key){
-            //case 'w': curr.style.top = (top - size) + "px"; break;
             case 's': curr.style.top = (top + size) + "px"; break;
             case 'a': curr.style.left = (left - size) + "px"; break;
             case 'd': curr.style.left = (left + size) + "px"; break;
@@ -378,9 +376,6 @@ function MainBody({size = 10, level = "Easy", onGameOver}){
                      curr.style.transform = `rotate(${deg - 90}deg)`;
                 }else{
                     isTouched(true, curr, size);
-                    // if(curr.classList.contains('block-color1')){
-                    //     isTouched(true, curr, size); // 'ㅡ' 모양은 한번 더 체크한다
-                    // }
                 }
                 break;
             case 'j':
@@ -395,25 +390,29 @@ function MainBody({size = 10, level = "Easy", onGameOver}){
     useEffect(()=>{
         // 꼭대기의 중앙부분 찼는지 확인
         if(isUnderCelling(body.current, size)){
-            // alert("Game Over");
-
             onGameOver({score, level});
-
             body.current.style.filter = "blur(6px)";
-            overRef.current.hidden = false;
-            setTimeout(()=> overRef.current.style.opacity = 1, 50);
-
+            ref_over.current.hidden = false;
+            setTimeout(()=> ref_over.current.style.opacity = 1, 50);
         }else{
-            //if(bodyHide) clearBlocks(body.current);
-            makeBlock(body, idx, size, level, fallRef, moveDownFunc, blockCount);
+            if(blockCount !== 0 && blockCount % 15 === 0){
+                ref_acc.current += 150;
+            }
+            let speed = level === "Easy" ? 1000 - ref_acc.current
+                        : level === "Normal" ? 600  - ref_acc.current
+                        : level === "Hard" ? 300  - ref_acc.current
+                        : 150 - ref_acc.current;   
+            if(speed < 100) speed = 100;                       
+            makeBlock(body, idx, size, ref_fall, moveDownFunc, blockCount, speed);
         }
     }, [blockCount]);
 
     useEffect(()=>{
+
         document.addEventListener("keydown", onKeyDown);
         return ()=>{ // hide = true 되서 컴포넌트 제거되기 직전에 document 이벤트 해지시킴
             document.removeEventListener("keydown", onKeyDown); 
-            clearInterval(fallRef.current);
+            clearInterval(ref_fall.current);
         };
     },[]);
 
@@ -430,6 +429,7 @@ function MainBody({size = 10, level = "Easy", onGameOver}){
                     <div className="score">Score : {score}</div>
                     <div style={{margin : "0 auto"}}></div>
                     <div className="score">Level : {level}</div>
+                    <div className="score"> cnt : {blockCount}</div>
                 </div>
 
                 {/* <div className="combo" ref={combo_div}>
@@ -444,11 +444,8 @@ function MainBody({size = 10, level = "Easy", onGameOver}){
                     </div> 
                 : null}
             </div>
-            <div className="game-over" ref={overRef} hidden={true}>
+            <div className="game-over" ref={ref_over} hidden={true}>
                 Game Over
-                {/* <div class="label3" style={{margin : "20px auto"}} onClick={restartClick}>Restart</div>
-                <div class="label3" style={{margin : "20px auto"}} onClick={backToMenuClick}>Back to menu</div>
-                <div class="label3" style={{margin : "20px auto"}} onClick={recordClick} ref={labelRef}>Record</div> */}
             </div>
             <div id="body" className="body-frame" ref={body} style={bodySize}></div>
         </div>
