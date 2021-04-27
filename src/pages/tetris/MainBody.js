@@ -115,7 +115,7 @@ function isTouched(rotate, block, size, key){
         if(leftSide > 0){
             move = Math.floor(leftSide / size) === 0 ? size : Math.floor(leftSide / size) * size;
             for(var i=1; i<=move/size; i++){
-                if(collision(false, block, size * (move/size), 'd')){
+                if(collision(false, block, size * (move/size), g_keyset[3])){
                     block.style.transform = `rotate(${deg - 90}deg)`;
                     return;
                 }
@@ -125,7 +125,7 @@ function isTouched(rotate, block, size, key){
         if(rightSide > 0){
             move = Math.floor(rightSide / size) === 0 ? size : Math.floor(rightSide / size) * size;
             for(var i=1; i<=move/size; i++){
-                if(collision(false, block, size * (move/size), 'a')){
+                if(collision(false, block, size * (move/size), g_keyset[2])){
                     block.style.transform = `rotate(${deg - 90}deg)`;
                     return;
                 }
@@ -135,7 +135,7 @@ function isTouched(rotate, block, size, key){
         if(downSide > 0){
             move = Math.floor(downSide / size) === 0 ? size : Math.floor(downSide / size) * size;
             for(var i=1; i<=move/size; i++){
-                if(collision(false, block, size * (move/size), 's')){
+                if(collision(false, block, size * (move/size), g_keyset[1])){
                     block.style.transform = `rotate(${deg - 90}deg)`;
                     return;
                 }
@@ -144,13 +144,13 @@ function isTouched(rotate, block, size, key){
         }
     }else{ // 이동시 벽너머로 삐져나갈 것인지 체크
         switch(key){
-            case 's': 
+            case g_keyset[1]: 
                 if(top - bodyInfo.top + size > h) return true;
                 else break;
-            case 'a': 
+            case g_keyset[2]: 
                 if(minLeft - bodyInfo.left - size < 0) return true;
                 else break;
-            case 'd': 
+            case g_keyset[3]: 
                 if(maxLeft - bodyInfo.left + size > w) return true;
                 else break;
         }
@@ -210,19 +210,19 @@ function collision(rotate, block, size, key){
                     const halfPlus = size + size / 2;
                     const half = size / 2;
                     switch(key){
-                        case 's':
+                        case g_keyset[1]:
                             if(Math.abs(currBits[k].left - deadBits[j].left) <= 2 && 
                                 currBits[k].top + halfPlus > deadBits[j].top && currBits[k].top + halfPlus < deadBits[j].top + size) {
                                     return true;
                                 }
                             else break;
-                        case 'a':
+                        case g_keyset[2]:
                             if(Math.abs(currBits[k].top - deadBits[j].top) <= 2 && 
                                 currBits[k].left - half > deadBits[j].left && currBits[k].left - half < deadBits[j].left + size) {
                                     return true;
                                 }
                             else break;
-                        case 'd':
+                        case g_keyset[3]:
                             if(Math.abs(currBits[k].top - deadBits[j].top) <= 2 && 
                                 currBits[k].left + halfPlus > deadBits[j].left && currBits[k].left + halfPlus < deadBits[j].left + size) return true;
                     }
@@ -297,7 +297,10 @@ function removeLayer(layer, body, size){
     }
 }
 
-function MainBody({size = 10, level = "Easy", onGameOver}){
+// g_keyset : 키셋 전역변수, 0 ~ 4 --> 회전, 아래이동, 왼쪽이동, 오른쪽이동, 떨어뜨리기
+var g_keyset = [];
+
+function MainBody({size = 10, level = "Easy", onGameOver, keyset = [g_keyset[0],g_keyset[1],g_keyset[2],g_keyset[3],g_keyset[4]]}){
     const body = useRef();
     const idx = Math.floor(Math.random() * 10 % 7 + 1);
     const [blockCount, setBlockCount] = useState(0);
@@ -312,10 +315,12 @@ function MainBody({size = 10, level = "Easy", onGameOver}){
     const combo_limit = useRef(3); // 제한시간
     const combo_div = useRef(); // div element
 
+    g_keyset = keyset.slice();
+
     const moveDownFunc = ()=>{
         const curr = document.querySelector('div.active');
         if(!curr) return;
-        if(isTouched(false, curr, size, "s") || collision(false, curr, size, "s")){ // 아랫쪽 박스 경계선 닿거나, 다른블록과 닿으면 비활성 처리
+        if(isTouched(false, curr, size, g_keyset[1]) || collision(false, curr, size, g_keyset[1])){ // 아랫쪽 박스 경계선 닿거나, 다른블록과 닿으면 비활성 처리
             clearInterval(ref_fall.current);
             ref_fall.current = '';
             curr.classList.remove('active');
@@ -366,10 +371,10 @@ function MainBody({size = 10, level = "Easy", onGameOver}){
         transform = transform.split('(').length > 1 ? Number(transform.split('(')[1].split('deg')[0]) : 0;
         
         switch(e.key){
-            case 's': curr.style.top = (top + size) + "px"; break;
-            case 'a': curr.style.left = (left - size) + "px"; break;
-            case 'd': curr.style.left = (left + size) + "px"; break;
-            case 'w':
+            case g_keyset[1]: curr.style.top = (top + size) + "px"; break;
+            case g_keyset[2]: curr.style.left = (left - size) + "px"; break;
+            case g_keyset[3]: curr.style.left = (left + size) + "px"; break;
+            case g_keyset[0]:
                  curr.style.transform = `rotate(${transform + 90}deg)`;
                  const deg = Number(curr.style.transform.split('(')[1].split('deg')[0]);
                  if(collision(true, curr, size)) {
@@ -378,9 +383,9 @@ function MainBody({size = 10, level = "Easy", onGameOver}){
                     isTouched(true, curr, size);
                 }
                 break;
-            case 'j':
+            case g_keyset[4]:
                 var moveDown = top + size;
-                while(!isTouched(false, curr, size, "s") && !collision(false, curr, size, "s")){
+                while(!isTouched(false, curr, size, g_keyset[1]) && !collision(false, curr, size, g_keyset[1])){
                     curr.style.top = moveDown + "px";
                     moveDown += size;
                 }
@@ -429,7 +434,6 @@ function MainBody({size = 10, level = "Easy", onGameOver}){
                     <div className="score">Score : {score}</div>
                     <div style={{margin : "0 auto"}}></div>
                     <div className="score">Level : {level}</div>
-                    <div className="score"> cnt : {blockCount}</div>
                 </div>
 
                 {/* <div className="combo" ref={combo_div}>

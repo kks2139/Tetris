@@ -101,3 +101,13 @@ app.post('/api/saveKeySet', (req, res) => {
         res.send(result);
     });
 });
+
+app.post('/api/saveTheme', (req, res) => { 
+    doQuery('saveTheme', req.body).then( obj =>{
+        const result = {
+            error : obj.error ? "Error occured." : "",
+            rows : obj.rows
+        }
+        res.send(result);
+    });
+});

@@ -14,13 +14,21 @@ function Tetris(){
     const [bodySize, setBodySize] = useState(30);
     const level = ["Easy", "Normal", "Hard", "Extreme"];
     const [currLevel, setCurrLevel] = useState("");
-
+    const [keys, setKeys] = useState([]);
     const ref_cont = useRef();
 
     const levelSelected = ({textContent})=>{
-        setHideMenu(true);
-        setHideBody(false);
         setCurrLevel(textContent);
+        const param = {
+            url : "getKeySet",
+            body : {name : context.session.id}
+        };
+        UT.request(param, (res)=>{
+            const arr = res.result.length > 0 ? res.result[0].keyset.split('/') : ['w','s','a','d','j'];
+            setKeys(arr);
+            setHideMenu(true);
+            setHideBody(false);
+        });
     }
     const onBackToMenu = ()=>{
         setHideMenu(false);
@@ -72,7 +80,7 @@ function Tetris(){
             {hideMenu ? null : <FirstMenu onSelect={levelSelected} level={level} onRefresh={onRefresh}></FirstMenu>}
             {hideBody ? null : 
                 <div ref={ref_cont} style={{margin : "0 auto"}}>
-                    <MainBody size={bodySize} level={currLevel} onGameOver={onGameOver}></MainBody>
+                    <MainBody size={bodySize} level={currLevel} onGameOver={onGameOver} keyset={keys}></MainBody>
                     <div className="label3 mainbody-side-btn" onClick={()=>{onRestart(currLevel)}}>Restart</div>
                     <div className="label3 mainbody-side-btn" onClick={()=>{onBackToMenu()}}>To menu</div>
                 </div>

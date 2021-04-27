@@ -227,8 +227,7 @@ input {
 }
 @keyframes blink {
     0% {color: white;}
-    30% {color: var(--theme-color)}
-    60% {color: var(--theme-color)}
+    50% {color: var(--inactive-color)}
     100% {color: white;}
 }
 @keyframes move-left {
@@ -315,7 +314,7 @@ input {
 
 .panel-box {
     border: 1px solid var(--inactive-color);
-    border-radius: 3px;
+    border-radius: 25px;
     height: 100%;
 }
 .panel-box:hover {
@@ -336,4 +335,9 @@ input {
 .panel-box > .panel-content {
     padding: 10px;
     height: calc(100% - 50px);
+}
+.x-center {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }

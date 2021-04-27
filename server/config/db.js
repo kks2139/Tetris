@@ -63,12 +63,14 @@ const sqlMap = {
          from score a
          inner join user b
             on a.name = b.name
+      group by a.level
     `,
     getKeySet : `
         select a.keyset
          from setting a
    inner join user b
            on a.name = b.name
+        where a.name = ?
     `,
     saveKeySet : `
         insert into setting(
@@ -81,6 +83,18 @@ const sqlMap = {
         on duplicate key update
             name = ?,
             keyset = ?
+    `,
+    saveTheme : `
+        insert into setting(
+            name,
+            theme
+        ) values (
+            ?,
+            ?
+        )
+        on duplicate key update
+            name = ?,
+            theme = ?
     `
 };
 
@@ -103,6 +117,8 @@ const doQuery = async (sqlId, p)=>{
         case 'getKeySet': params = [p.name];
             break;
         case 'saveKeySet': params = [p.name, p.keyset, p.name, p.keyset];
+            break;
+        case 'saveTheme': params = [p.name, p.theme, p.name, p.theme];
             break;
     }
 
