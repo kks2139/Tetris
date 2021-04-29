@@ -70,8 +70,12 @@ input {
     overflow: hidden;
 }
 .dark {
-    background-color: #444444;
-    color: white ;
+    background-color: #363636;
+    color: #b1b1b1 ;
+}
+.dark-el {
+    background-color: #969696;
+    color: rgb(17, 17, 17);
 }
 
 .areaBox {
@@ -328,6 +332,8 @@ input {
     padding: 0 10px;
     margin-left: 20px;
     width: fit-content;
+    height: 28px;
+    line-height: 24px;
     font-size: 21px;
     font-weight: bold;
     border-radius: 15px;

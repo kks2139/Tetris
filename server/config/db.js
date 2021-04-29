@@ -84,6 +84,13 @@ const sqlMap = {
             name = ?,
             keyset = ?
     `,
+    getTheme : `
+        select a.theme
+         from setting a
+   inner join user b
+           on a.name = b.name
+        where a.name = ?
+    `,
     saveTheme : `
         insert into setting(
             name,
@@ -117,6 +124,8 @@ const doQuery = async (sqlId, p)=>{
         case 'getKeySet': params = [p.name];
             break;
         case 'saveKeySet': params = [p.name, p.keyset, p.name, p.keyset];
+            break;
+        case 'getTheme': params = [p.name];
             break;
         case 'saveTheme': params = [p.name, p.theme, p.name, p.theme];
             break;

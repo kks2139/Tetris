@@ -102,6 +102,16 @@ app.post('/api/saveKeySet', (req, res) => {
     });
 });
 
+app.post('/api/getTheme', (req, res) => { 
+    doQuery('getTheme', req.body).then( obj =>{
+        const result = {
+            error : obj.error ? "Error occured." : "",
+            rows : obj.rows
+        }
+        res.send(result);
+    });
+});
+
 app.post('/api/saveTheme', (req, res) => { 
     doQuery('saveTheme', req.body).then( obj =>{
         const result = {

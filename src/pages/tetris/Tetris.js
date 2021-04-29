@@ -1,4 +1,4 @@
-import React, { useRef, useState, useContext } from 'react';
+import React, { useRef, useState, useContext, useEffect } from 'react';
 import FirstMenu from './FirstMenu';
 import MainBody from './MainBody';
 import TopMenu from './TopMenu';
@@ -74,6 +74,19 @@ function Tetris(){
         }
     }
     
+    useEffect(()=>{
+        const param = {
+            url : "getTheme",
+            body : {name : context.session.id}
+        };
+        UT.request(param, (res)=>{
+            const rs = res.result[0];
+            if(rs){
+                document.querySelector('#root').classList.add(rs.theme);
+            }
+        });
+    }, []);
+
     return(
         <div className="frame">
             <TopMenu></TopMenu>

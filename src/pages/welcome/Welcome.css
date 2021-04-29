@@ -1,9 +1,8 @@
 .welcome-page {
-    /* background-color: #f8f8f8; */
-    /* color: black; */
     width: 100%;
     overflow: hidden;
-    /* border: 10px solid var(--theme-color); */
+    background-color: white;
+    color: black;
 }
 .welcome-title {
     top: -120px;

@@ -23,6 +23,7 @@ function App() {
 
   const onLogout = ()=>{
     UT.confirm("Do you wnat to logout?", ()=>{
+      document.querySelector('#root').classList.remove('dark');
       sessionStorage.clear();
       setSession({id : null, login : false});
     });

@@ -5,7 +5,7 @@ import {SessionContext} from '../../App';
 
 function Setting({onBack}){
     const [keys, setKeys] = useState([]);
-    const [theme, setTheme] = useState("");
+    const ref_theme_col = useRef("");
     const ref_keybox = useRef();
     const ref_theme = useRef();
     const context = useContext(SessionContext);
@@ -13,28 +13,34 @@ function Setting({onBack}){
 
     const onClick = (e)=>{
         const targ = e.currentTarget;
-        const node = targ.id.indexOf("theme") === -1 ? ref_keybox.current : ref_theme.current;
+        const idx = targ.id.indexOf("theme");
+        const node = idx === -1 ? ref_keybox.current : ref_theme.current;
         const sel = node.querySelector(`.${selected}`);
+        
         if(sel){
-            sel.classList.toggle(selected);
-            if(sel.id !== targ.id) targ.classList.toggle(selected);
+            if(idx === -1){
+                sel.classList.toggle(selected);
+                if(sel.id !== targ.id) targ.classList.toggle(selected);
+            }else{
+                if(sel.id !== targ.id) {
+                    targ.classList.add(selected);
+                    sel.classList.remove(selected)
+                }
+            }
         }else{
             targ.classList.toggle(selected);
         }
-        // if(targ.id.indexOf("theme") === -1){
-        //     if(sel){
-        //         sel.classList.toggle(selected);
-        //         if(sel.id !== targ.id) targ.classList.toggle(selected);
-        //     }else{
-        //         targ.classList.toggle(selected);
-        //     }
-        // }else{
-        //     if(targ.id === "theme1"){
-        //         setTheme("Light");
-        //     }else{
-        //         setTheme("Dark");
-        //     }
-        // }
+
+        if(idx > -1){
+            const root = document.querySelector('#root');
+            if(targ.id === "theme2"){
+                root.classList.add("dark");
+                ref_theme_col.current = "dark";
+            }else{
+                root.classList.remove("dark");
+                ref_theme_col.current = "";
+            }
+        }
     }
     const onKeyDown = (e)=>{
         const targ = ref_keybox.current.querySelector(`.${selected}`);
@@ -70,13 +76,26 @@ function Setting({onBack}){
             });
         });
     }
+    const getTheme = ()=>{
+        const param = {
+            url : "getTheme",
+            body : {name : context.session.id}
+        };
+        UT.request(param, (res)=>{
+            if(res.result[0]){
+                const targ = res.result[0].theme === "dark" ? "theme2" : "theme1";
+                ref_theme.current.querySelector(`#${targ}`).classList.add(selected);
+                ref_theme_col.current = res.result[0].theme;
+            }
+        });
+    }
     const saveTheme = ()=>{
         UT.confirm("Do you want to save?", ()=>{
             const param = {
                 url : "saveTheme",
                 body : {
                     name : context.session.id,
-                    theme : theme
+                    theme : ref_theme_col.current
                 }
             } 
             UT.request(param, (res)=>{
@@ -90,6 +109,7 @@ function Setting({onBack}){
 
     useEffect(()=>{
         getKeyset();
+        getTheme();
         document.addEventListener("keydown", onKeyDown);
         return ()=> document.removeEventListener("keydown", onKeyDown);
     }, []);
