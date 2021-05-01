@@ -15,9 +15,9 @@ function FootNotice(){
     
     return (
         <div className="footer">
-            <div className="footer-noti-text">Notice</div>
+            <div className="footer-noti-text" style={{color : "black"}}>Notice</div>
             <div className="ani-move-left" style={{whiteSpace: "nowrap"}}>
-                <span style={{marginRight : "12px"}}>Current Top Rankers</span>  
+                <span style={{marginRight : "12px", color : "black"}}>Current Top Rankers</span>  
                 {topList.map((top, idx)=>{
                     const style = {
                         marginRight : "10px",
@@ -28,7 +28,8 @@ function FootNotice(){
                             {` ${top.level} : ${top.name}`}
                         </span>
                     );
-                })}!
+                })}
+                <span style={{color : "black"}}>!</span>
             </div>
         </div>
     );

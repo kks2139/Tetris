@@ -82,14 +82,14 @@ function Tetris(){
         UT.request(param, (res)=>{
             const rs = res.result[0];
             if(rs){
-                document.querySelector('#root').classList.add(rs.theme);
+                context.onChangeTheme(rs.theme);
             }
         });
     }, []);
 
     return(
         <div className="frame">
-            <TopMenu></TopMenu>
+            <TopMenu themeColor={context.themeColor}></TopMenu>
             {hideMenu ? null : <FirstMenu onSelect={levelSelected} level={level} onRefresh={onRefresh}></FirstMenu>}
             {hideBody ? null : 
                 <div ref={ref_cont} style={{margin : "0 auto"}}>

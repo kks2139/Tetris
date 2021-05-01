@@ -10,7 +10,10 @@ div#root {
     --inactive-color : rgb(175, 175, 175);
     --warn : rgba(255, 70, 64, 0.76);
     --dot-size : 18px;
-    --theme-shadow : 0px 0px 8px 0px var(--inactive-color)
+    --theme-shadow : 0px 0px 8px 0px var(--inactive-color);
+    
+    --theme-black : #7a7a7a;
+    --theme-black2 : #4b4b4b;
 }
 ::-webkit-scrollbar {
     width: 10px;
@@ -71,11 +74,10 @@ input {
 }
 .dark {
     background-color: #363636;
-    color: #b1b1b1 ;
+    color: white ;
 }
 .dark-el {
-    background-color: #969696;
-    color: rgb(17, 17, 17);
+    background-color: var(--theme-black) !important;
 }
 
 .areaBox {

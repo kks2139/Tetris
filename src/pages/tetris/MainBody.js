@@ -331,7 +331,8 @@ function MainBody({size = 10, level = "Easy", onGameOver, keyset = [g_keyset[0],
             for(var i=0; i<fullLayer.length; i++){ // 꽉찬줄 제거
                 removeLayer(fullLayer[i], body.current, size);
             }
-            // 2초 이내에 또 없애면 콤보증가 (콤보스택만큼 점수에 곱하기)
+            
+            // 3초 이내에 또 없애면 콤보증가 (콤보스택만큼 점수에 곱하기)
             if(fullLayer.length > 0){
                 if(combo_limit.current > 0) {
                     clearInterval(combo_timerId.current);
@@ -342,8 +343,9 @@ function MainBody({size = 10, level = "Easy", onGameOver, keyset = [g_keyset[0],
                     if(combo_limit.current == 3) combo_div.current.style.opacity = 0.9;
                     combo_limit.current--;    
                     
-                    if(combo_limit.current == 1) combo_div.current.style.opacity = 0;
+                    // if(combo_limit.current == 1) combo_div.current.style.opacity = 0;
                     if(combo_limit.current == 0){ // 제한시간 초과시 콤보값 초기화
+                        combo_div.current.style.opacity = 0;
                         clearInterval(combo_timerId.current);
                         combo_limit.current = 3;
                         setComboStack(0);
@@ -400,14 +402,14 @@ function MainBody({size = 10, level = "Easy", onGameOver, keyset = [g_keyset[0],
             ref_over.current.hidden = false;
             setTimeout(()=> ref_over.current.style.opacity = 1, 50);
         }else{
-            if(blockCount !== 0 && blockCount % 15 === 0){
-                ref_acc.current += 150;
+            if(blockCount !== 0 && blockCount % 25 === 0){
+                ref_acc.current += 100;
             }
             let speed = level === "Easy" ? 1000 - ref_acc.current
                         : level === "Normal" ? 600  - ref_acc.current
                         : level === "Hard" ? 300  - ref_acc.current
                         : 150 - ref_acc.current;   
-            if(speed < 100) speed = 100;                       
+            if(speed < 100) speed = 150;                       
             makeBlock(body, idx, size, ref_fall, moveDownFunc, blockCount, speed);
         }
     }, [blockCount]);

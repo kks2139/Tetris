@@ -8,6 +8,7 @@ function Setting({onBack}){
     const ref_theme_col = useRef("");
     const ref_keybox = useRef();
     const ref_theme = useRef();
+    const ref_init_theme = useRef("");
     const context = useContext(SessionContext);
     const selected = "key-btn-sel";
 
@@ -40,6 +41,7 @@ function Setting({onBack}){
                 root.classList.remove("dark");
                 ref_theme_col.current = "";
             }
+            context.onChangeTheme(ref_theme_col.current);
         }
     }
     const onKeyDown = (e)=>{
@@ -86,6 +88,7 @@ function Setting({onBack}){
                 const targ = res.result[0].theme === "dark" ? "theme2" : "theme1";
                 ref_theme.current.querySelector(`#${targ}`).classList.add(selected);
                 ref_theme_col.current = res.result[0].theme;
+                ref_init_theme.current = res.result[0].theme;
             }
         });
     }
@@ -99,12 +102,18 @@ function Setting({onBack}){
                 }
             } 
             UT.request(param, (res)=>{
-                UT.alert(res.errMsg || "Save complete!");
+                UT.alert(res.errMsg || "Save complete!", ()=>{
+                    getTheme();
+                });
             });
         });
     }
     const restoreKeyset = ()=>{
         setKeys(['w','s','a','d','j']);
+    }
+    const onBackClick = ()=>{
+        context.onChangeTheme(ref_init_theme.current);
+        onBack();
     }
 
     useEffect(()=>{
@@ -150,7 +159,7 @@ function Setting({onBack}){
                     </div>
                 </Panel>
             </div>
-            <div className="label1" onClick={() => onBack()}>Back</div>
+            <div className="label1" onClick={onBackClick}>Back</div>
         </>
     );
 }
