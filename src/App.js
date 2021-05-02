@@ -3,7 +3,7 @@ import './App.css';
 import Tetris from './pages/tetris/Tetris';
 import { UT } from './util/util';
 import Welcome from './pages/welcome/Welcome';
-
+const crypto = require('crypto');
 export const SessionContext = React.createContext(null);
 
 function App() {
@@ -27,6 +27,7 @@ function App() {
       document.querySelector('#root').classList.remove('dark');
       sessionStorage.clear();
       setSession({id : null, login : false});
+      setThemeColor("");
     });
   }
 

@@ -6,6 +6,7 @@ app.use(express.json());                // 앞단의 파라미터를 받게 해�
 app.use(express.urlencoded( {extended : false } ));
 
 const doQuery = require('./config/db');
+const helper = require('./helper');       // pw 암호화
 
 // 현재경로(server.js) 에서 node server.js 를 입력해 서버실행. 
 app.listen(PORT, () => {                // 해당 포트번호로 서버실행
@@ -17,6 +18,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/api/login', (req, res)=>{
+    req.body.pw = helper.encrypt(req.body.pw);
     doQuery('getUser', req.body).then( obj =>{
         const result = {
             error : obj.error ? "Error occured." : "",
@@ -26,12 +28,13 @@ app.post('/api/login', (req, res)=>{
     });
 });
 
-app.post('/api/signin', (req, res)=>{
+app.post('/api/signup', (req, res)=>{
     doQuery('getUser', req.body).then( user =>{
         if(user.rows.length > 0){
-            res.send({error : "Already exsit."});
+            res.send({error : "exist"});
         }else{
-            doQuery('signin', req.body).then( obj =>{
+            req.body.pw = helper.encrypt(req.body.pw);
+            doQuery('signup', req.body).then( obj =>{
                 const result = {
                     error : obj.error ? "Error occured." : "",
                     rows : obj.rows

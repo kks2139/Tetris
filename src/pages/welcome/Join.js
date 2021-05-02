@@ -27,16 +27,16 @@ function Join({onJoinEnd}){
         }
     }
     const onClick = (e)=>{
-        if(e.target.dataset.name === "signIn"){
-            goSignIn();
+        if(e.target.dataset.name === "signup"){
+            gosignup();
         }else{
             onJoinEnd();
         }
     }
     const onKeyDown = (e)=>{
-        if(e.keyCode === 13) goSignIn();
+        if(e.keyCode === 13) gosignup();
     }
-    const goSignIn = ()=>{
+    const gosignup = ()=>{
         const empty = !(id.trim()) ? "id" : !(pw.trim()) ? "pw" : !(pwConf.trim()) ? "pw_conf" : "";
         if(empty){
             const input = ref_box.current.querySelector(`input[name=${empty}]`);
@@ -59,12 +59,13 @@ function Join({onJoinEnd}){
 
         UT.confirm("Would you like to register?", ()=>{
             const param = {
-                url : "signin",
+                url : "signup",
                 body : {id, pw}
             };
             UT.request(param, (result)=>{
                 if(result.errMsg){
-                    UT.alert(`'${id}' is already exist`);
+                    const msg = result.errMsg === "exist" ? `'${id}' is already exist` : result.errMsg;
+                    UT.alert(msg);
                 }else{
                     UT.alert("You are registed.", ()=>{
                         onJoinEnd();
@@ -96,7 +97,7 @@ function Join({onJoinEnd}){
             <div className="input-login" style={style}>
                 <input name="pw_conf" onChange={onChange} onKeyDown={onKeyDown} placeholder="Password Confirm" type="password"></input>
             </div>
-            <div className="login-button" data-name="signIn" onClick={onClick}  style={style}>Sing up</div>
+            <div className="login-button" data-name="signup" onClick={onClick}  style={style}>Sing up</div>
 
             <div className="warn-msg" ref={ref_warn} style={{top : "-55px"}}>{warnMsg}</div>
 

@@ -60,7 +60,8 @@ function Setting({onBack}){
             body : {name : context.session.id}
         };
         UT.request(param, (res)=>{
-            const arr = res.result.length > 0 ? res.result[0].keyset.split('/') : ['w','s','a','d','j'];
+            var keyset = res.result[0].keyset;
+            const arr = keyset ? keyset.split('/') : ['w','s','a','d','j'];
             setKeys(arr);
         });
     }
@@ -84,12 +85,10 @@ function Setting({onBack}){
             body : {name : context.session.id}
         };
         UT.request(param, (res)=>{
-            if(res.result[0]){
-                const targ = res.result[0].theme === "dark" ? "theme2" : "theme1";
-                ref_theme.current.querySelector(`#${targ}`).classList.add(selected);
-                ref_theme_col.current = res.result[0].theme;
-                ref_init_theme.current = res.result[0].theme;
-            }
+            const targ = res.result[0] && res.result[0].theme === "dark" ? "theme2" : "theme1";
+            ref_theme.current.querySelector(`#${targ}`).classList.add(selected);
+            ref_theme_col.current = res.result[0].theme;
+            ref_init_theme.current = res.result[0].theme;
         });
     }
     const saveTheme = ()=>{
