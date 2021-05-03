@@ -37,7 +37,7 @@
    
 ***
    
-### 2. 사용한 기술
+### 2. 사용 기술
 - UI : HTML / CSS / Javascript / React Hooks   
 - Server : Node Express   
 - DB : AWS RDS / MySQL   
