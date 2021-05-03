@@ -3,7 +3,7 @@
    
 ***
    
-### 화면구성 및 기능
+### 1. 화면구성 및 기능
 1. 로그인 화면
     - 로그인 수행
     - 회원가입 수행
@@ -37,7 +37,7 @@
    
 ***
    
-### 사용한 기술
+### 2. 사용한 기술
 - UI : HTML / CSS / Javascript / React Hooks   
 - Server : Node Express   
 - DB : AWS RDS / MySQL   
