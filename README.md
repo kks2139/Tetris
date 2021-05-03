@@ -1,10 +1,10 @@
-# Tetris
+# TETRIS
 Making my tetris game using react<br>
 리액트로 만들어보는 테트리스 사이트 입니다.
-
+   
 ***
-
-## 화면구성 및 기능
+   
+### 화면구성 및 기능
 1. 로그인 화면
     - 로그인 수행
     - 회원가입 수행
@@ -38,10 +38,10 @@ Making my tetris game using react<br>
    
 ***
    
-## 사용한 기술스택
-UI     : HTML / CSS / Javascript / React Hooks   
-Server : Node Express   
-DB     : AWS RDS / MySql   
+### 사용한 기술
+- UI     : HTML / CSS / Javascript / React Hooks   
+- Server : Node Express   
+- DB     : AWS RDS / MySql   
 
 
 
