@@ -2,6 +2,7 @@
 Making my tetris game using react<br>
 리액트로 만들어보는 테트리스 사이트 입니다.
 
+***
 
 ## 화면구성 및 기능
 1. 로그인 화면
@@ -34,13 +35,13 @@ Making my tetris game using react<br>
 7. 세팅(설정) 화면
     - 게임 키를 바꿀 수 있다
     - 페이지 테마색을 바꿀 수 있다 (Dark / Light)
-
-
-
+   
+***
+   
 ## 사용한 기술스택
-UI     : HTML / CSS / Javascript / React Hooks
-Server : Node Express
-DB     : AWS RDS / MySql
+UI     : HTML / CSS / Javascript / React Hooks   
+Server : Node Express   
+DB     : AWS RDS / MySql   
 
 
 
