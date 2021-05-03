@@ -39,7 +39,7 @@ Making my tetris game using react<br>
 ***
    
 ### 사용한 기술
-- UI &npsp;&npsp;&npsp;&npsp;&npsp;: HTML / CSS / Javascript / React Hooks   
+- UI <br/><br/><br/><br/>: HTML / CSS / Javascript / React Hooks   
 - Server : Node Express   
 - DB     : AWS RDS / MySql   
 
