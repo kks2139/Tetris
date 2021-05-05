@@ -1,16 +1,17 @@
-# Tetris
-Making my tetris game using react<br>
-리액트로 만들어보는 테트리스 사이트 입니다. (진행중)
-
-
-* 화면구성 및 기능
+# TETRIS - Making my tetris game using react
+리액트로 만들어보는 테트리스 사이트 입니다.
+   
+***
+   
+### 1. 화면구성 및 기능
 1. 로그인 화면
-    - 로그인 하기, 회원가입 하기
-    - 로그인 시 세션 유지
+    - 로그인 수행
+    - 회원가입 수행
 
 2. 메인 화면
+    - 로그인 시 세션 유지
     - 상단 메뉴바 : 사용자 정보 표시 및 로그아웃 버튼 
-    - 화면 중앙부 : Tetris 타이틀 표시 및 시작, 랭킹 보기 버튼
+    - 화면 중앙부 : Tetris 타이틀 표시. Start, Ranking, Setting 메뉴 존재
     - 하단 알림바 : 현재 최고점 유저의 정보 표시
 
 3. 레벨 선택 화면
@@ -22,6 +23,7 @@ Making my tetris game using react<br>
     - 기본키 w, s, a, d, j > 회전, 아래이동, 왼쪽이동, 오른쪽이동, 한번에 낙하
 
 5. 게임 오버
+    - 게임이 끝났을 경우 점수를 기록할 것인지 묻는 alert 메시지 생성
     - 게임 점수를 기록한다
 
 6. 랭킹 목록 화면
@@ -32,3 +34,22 @@ Making my tetris game using react<br>
 7. 세팅(설정) 화면
     - 게임 키를 바꿀 수 있다
     - 페이지 테마색을 바꿀 수 있다 (Dark / Light)
+   
+***
+   
+### 2. 사용 기술
+- UI : HTML / CSS / Javascript / React Hooks   
+- Server : Node Express   
+- DB : AWS RDS / MySQL   
+
+
+
+
+
+
+
+
+
+
+
+
