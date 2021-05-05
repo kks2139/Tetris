@@ -13,7 +13,7 @@ function FirstMenu({onSelect, level = [], onRefresh}){
     const ref_title = useRef();
     const [hideRank, setHideRank] = useState(true);
     const [hideOpt, setHideOpt] = useState(true);
-    const [userNm, setUserNm] = useState({name : ""});
+    const [userNm, setUserNm] = useState("");
     const [comboVal, setComboVal] = useState("");
 
     const clickStart = (e)=>{
@@ -42,6 +42,8 @@ function FirstMenu({onSelect, level = [], onRefresh}){
     const onBack = ()=>{
         setHideRank(true);
         setHideOpt(true);
+        setComboVal("");
+        setUserNm("");
         ref_title.current.classList.toggle("title-min");
     }
     const onSearch = (userNm)=>{

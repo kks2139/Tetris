@@ -18,8 +18,14 @@ function RankingBox({onBack, searchText, filterValue}){
             }
         };
         UT.request(param, (res)=>{
-            const sorted = res.result.sort((a, b)=> b.score - a.score);
-            setRankList(sorted);
+            var list = res.result;
+            if(filterValue){
+                list = list.filter(d => d.level === filterValue);
+            }
+            if(searchText.name){
+                list = list.filter(d => d.name.toLowerCase().indexOf(searchText.name.toLowerCase()) > -1);
+            }
+            setRankList(list);
         });
     }
     const getRankHistory = (name)=>{
@@ -60,8 +66,7 @@ function RankingBox({onBack, searchText, filterValue}){
                         <div className="rank-box">
                             <div style={{height : "45vh"}}>
                                 {rankList.map((rank, idx) => {
-                                    if(idx === 0) rank.link = '/rank1.png';
-                                    rank.rank = idx + 1;
+                                    if(rank.rank === 1) rank.link = '/rank1.png';
                                     return <RankingList rank={rank} key={rank.name} onRowClick={getRankHistory}></RankingList>;
                                 })}
                             </div>

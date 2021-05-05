@@ -26,13 +26,19 @@ const sqlMap = {
         )
     `,
     getRankList : `
-        select a.name, max(a.score) score, a.level, a.reg_dt 
+       select @rownum := @rownum + 1 'rank'
+            , A.*
+         from (
+        select a.name
+             , max(a.score) score
+             , a.level
+             , a.reg_dt 
           from score a
     inner join user b
             on a.name = b.name
-        where b.name like ?
-          and a.level like ?
-        group by name
+         group by name
+         order by score desc) A,
+       (select @rownum := 0) R
     `,
     saveScore : `
         insert into score 

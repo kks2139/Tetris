@@ -24,7 +24,7 @@ function Tetris(){
             body : {name : context.session.id}
         };
         UT.request(param, (res)=>{
-            const arr = res.result.length > 0 ? res.result[0].keyset.split('/') : ['w','s','a','d','j'];
+            const arr = res.result[0].keyset ? res.result[0].keyset.split('/') : ['w','s','a','d','j'];
             setKeys(arr);
             setHideMenu(true);
             setHideBody(false);
