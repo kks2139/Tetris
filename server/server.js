@@ -1,9 +1,15 @@
+const csrf = require('csurf');
 const express = require('express');     // express = nodeJS 서버관리 모듈
 const app = express();                  // app 변수로 서버관리
 const PORT = process.env.PORT || 4000;  // 포트설정
 
 app.use(express.json());                // 앞단의 파라미터를 받게 해준다 (req.body.값이름)
 app.use(express.urlencoded( {extended : false } ));
+// app.use(csrf());
+app.use((err, req, res, next)=>{
+    //console.log("always print");
+    next();
+});
 
 const doQuery = require('./config/db');
 const helper = require('./helper');       // pw 암호화
@@ -13,8 +19,8 @@ app.listen(PORT, () => {                // 해당 포트번호로 서버실행
     console.log(`Server On : http://localhost:${PORT}/`);
 });
 
-app.get('/', (req, res) => { 
-    res.send(`This is server root url. port:${PORT}`);
+app.get('/api', (req, res) => { 
+    res.send({test : "test api"});
 });
 
 app.post('/api/login', (req, res)=>{
@@ -22,7 +28,8 @@ app.post('/api/login', (req, res)=>{
     doQuery('getUser', req.body).then( obj =>{
         const result = {
             error : obj.error ? "Error occured." : "",
-            rows : obj.rows
+            rows : obj.rows,
+            data : helper.token()
         }
         res.send(result);
     });

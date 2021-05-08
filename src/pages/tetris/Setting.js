@@ -60,7 +60,7 @@ function Setting({onBack}){
             body : {name : context.session.id}
         };
         UT.request(param, (res)=>{
-            var keyset = res.result[0].keyset;
+            var keyset = res.result[0] && res.result[0].keyset;
             const arr = keyset ? keyset.split('/') : ['w','s','a','d','j'];
             setKeys(arr);
         });
@@ -87,8 +87,8 @@ function Setting({onBack}){
         UT.request(param, (res)=>{
             const targ = res.result[0] && res.result[0].theme === "dark" ? "theme2" : "theme1";
             ref_theme.current.querySelector(`#${targ}`).classList.add(selected);
-            ref_theme_col.current = res.result[0].theme;
-            ref_init_theme.current = res.result[0].theme;
+            ref_theme_col.current = res.result[0] ? res.result[0].theme : "light";
+            ref_init_theme.current = res.result[0] ? res.result[0].theme : "light";
         });
     }
     const saveTheme = ()=>{

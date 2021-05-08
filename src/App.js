@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Tetris from './pages/tetris/Tetris';
 import { UT } from './util/util';
 import Welcome from './pages/welcome/Welcome';
-const crypto = require('crypto');
 export const SessionContext = React.createContext(null);
 
 function App() {
@@ -53,4 +52,4 @@ function App() {
   );
 }
 
-export default App;
+ export default App;

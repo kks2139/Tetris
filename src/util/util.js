@@ -26,8 +26,10 @@ export const UT = {
         UT.showLoadMask(true);
         fetch("/api/" + url, {
             method: "POST",
+            credentials: "same-origin",
             headers: {
                 "Content-Type": "application/json",
+                "X-CSRF-TOKEN": document.querySelector('meta[name=_csrf]').content
             },
             body: JSON.stringify(body)
         })
@@ -38,7 +40,8 @@ export const UT = {
         .then(res => {
             const result = {
                 errMsg : res.error,
-                result : res.rows
+                result : res.rows,
+                data : res.data
             }
             if(callback && typeof callback === "function") callback(result);
         })
