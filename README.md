@@ -42,6 +42,9 @@
 - Server : Node Express   
 - DB : AWS RDS / MySQL   
 
+***
+
+### 3. 실행 화면 
 
 
 
