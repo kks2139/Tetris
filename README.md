@@ -47,10 +47,6 @@
 ### 3. 실행 화면 
 
 1. Light 테마
-<style>
-   div {display : flex;}
-   div > img {margin : 0 20px;}
-</style>
 <div>
    <img src="https://github.com/kks2139/Tetris/blob/main/readme_img/login.PNG?raw=true" width="400"/>
    <img src="https://github.com/kks2139/Tetris/blob/main/readme_img/mainpage.PNG?raw=true" width="400"/>
