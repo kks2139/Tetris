@@ -46,7 +46,7 @@
 
 ### 3. 실행 화면 
 
-
+<img src="{{site.baseurl}}/readme_img/login.png" width="100"/>
 
 
 
