@@ -48,8 +48,8 @@
 
 1. Light 테마
 <div>
-   <img src="https://github.com/kks2139/Tetris/blob/main/readme_img/login.PNG?raw=true" width="400" style="border-radius:10px;"/>
-   <img src="https://github.com/kks2139/Tetris/blob/main/readme_img/mainpage.PNG?raw=true" width="400"/>
+   <img src="https://github.com/kks2139/Tetris/blob/main/readme_img/login.PNG?raw=true" width="400px" height="350px"/>
+   <img src="https://github.com/kks2139/Tetris/blob/main/readme_img/mainpage.PNG?raw=true" width="400px" height="350px"/>
 <div>
 </div>
    <img src="https://github.com/kks2139/Tetris/blob/main/readme_img/ranking.PNG?raw=true" width="400"/>
