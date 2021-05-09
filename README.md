@@ -48,29 +48,36 @@
 
 1. Light 테마
 - 로그인 / 메인
+<div>
    <img src="https://github.com/kks2139/Tetris/blob/main/readme_img/login.PNG?raw=true" width="430px" height="350px"/>  
    <img src="https://github.com/kks2139/Tetris/blob/main/readme_img/mainpage.PNG?raw=true" width="430px" height="350px"/>
-   
+</div>
 - 랭킹조회 / 세팅
+<div>
    <img src="https://github.com/kks2139/Tetris/blob/main/readme_img/ranking.PNG?raw=true" width="430px" height="350px"/>
    <img src="https://github.com/kks2139/Tetris/blob/main/readme_img/setting.PNG?raw=true" width="430px" height="350px"/>
-
+</div>
 - 레벨선택 / 게임시작
+<div>
    <img src="https://github.com/kks2139/Tetris/blob/main/readme_img/levelsel.PNG?raw=true" width="430px" height="350px"/>
    <img src="https://github.com/kks2139/Tetris/blob/main/readme_img/play.PNG?raw=true" width="430px" height="350px"/>
-
+</div>
 - 게임오버
+<div>
    <img src="https://github.com/kks2139/Tetris/blob/main/readme_img/gameover.PNG?raw=true" width="430px" height="350px"/>
-
+</div>
 2. Dark 테마
-   <img src="https://github.com/kks2139/Tetris/blob/main/readme_img/mainpage_dark.PNG?raw=true" width="400"/>
-   <img src="https://github.com/kks2139/Tetris/blob/main/readme_img/ranking_dark.PNG?raw=true" width="400"/>
-
-   <img src="https://github.com/kks2139/Tetris/blob/main/readme_img/setting_dark.PNG?raw=true" width="400"/>
-   <img src="https://github.com/kks2139/Tetris/blob/main/readme_img/levelsel_dark.PNG?raw=true" width="400"/>
-   
-   <img src="https://github.com/kks2139/Tetris/blob/main/readme_img/play_dark.PNG?raw=true" width="400"/>
-
+<div>
+   <img src="https://github.com/kks2139/Tetris/blob/main/readme_img/mainpage_dark.PNG?raw=true" width="430px" height="350px"/>
+   <img src="https://github.com/kks2139/Tetris/blob/main/readme_img/ranking_dark.PNG?raw=true" width="430px" height="350px"/>
+</div>
+<div>
+   <img src="https://github.com/kks2139/Tetris/blob/main/readme_img/setting_dark.PNG?raw=true" width="430px" height="350px"/>
+   <img src="https://github.com/kks2139/Tetris/blob/main/readme_img/levelsel_dark.PNG?raw=true" width="430px" height="350px"/>
+</div>
+<div>
+   <img src="https://github.com/kks2139/Tetris/blob/main/readme_img/play_dark.PNG?raw=true" width="430px" height="350px"/>
+</div>
 
 
 
