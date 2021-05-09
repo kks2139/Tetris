@@ -47,8 +47,10 @@
 ### 3. 실행 화면 
 
 1. Light 테마
+<div style="display:flex;">
 <img src="https://github.com/kks2139/Tetris/blob/main/readme_img/login.PNG?raw=true" width="400"/>
 <img src="https://github.com/kks2139/Tetris/blob/main/readme_img/mainpage.PNG?raw=true" width="400"/>
+</div>
 <img src="https://github.com/kks2139/Tetris/blob/main/readme_img/ranking.PNG?raw=true" width="400"/>
 <img src="https://github.com/kks2139/Tetris/blob/main/readme_img/setting.PNG?raw=true" width="400"/>
 <img src="https://github.com/kks2139/Tetris/blob/main/readme_img/levelsel.PNG?raw=true" width="400"/>
