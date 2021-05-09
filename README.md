@@ -47,18 +47,18 @@
 ### 3. 실행 화면 
 
 1. Light 테마
-<img src="https://github.com/kks2139/Tetris/blob/main/readme_img/login.PNG?raw=true" width="600"/>
-<img src="https://github.com/kks2139/Tetris/blob/main/readme_img/mainpage.PNG?raw=true" width="600"/>
-<img src="https://github.com/kks2139/Tetris/blob/main/readme_img/ranking.PNG?raw=true" width="600"/>
-<img src="https://github.com/kks2139/Tetris/blob/main/readme_img/setting.PNG?raw=true" width="600"/>
-<img src="https://github.com/kks2139/Tetris/blob/main/readme_img/levelsel.PNG?raw=true" width="600"/>
-<img src="https://github.com/kks2139/Tetris/blob/main/readme_img/play.PNG?raw=true" width="600"/>
-<img src="https://github.com/kks2139/Tetris/blob/main/readme_img/gameover.PNG?raw=true" width="600"/>
+<img src="https://github.com/kks2139/Tetris/blob/main/readme_img/login.PNG?raw=true" width="400"/>
+<img src="https://github.com/kks2139/Tetris/blob/main/readme_img/mainpage.PNG?raw=true" width="400"/>
+<img src="https://github.com/kks2139/Tetris/blob/main/readme_img/ranking.PNG?raw=true" width="400"/>
+<img src="https://github.com/kks2139/Tetris/blob/main/readme_img/setting.PNG?raw=true" width="400"/>
+<img src="https://github.com/kks2139/Tetris/blob/main/readme_img/levelsel.PNG?raw=true" width="400"/>
+<img src="https://github.com/kks2139/Tetris/blob/main/readme_img/play.PNG?raw=true" width="400"/>
+<img src="https://github.com/kks2139/Tetris/blob/main/readme_img/gameover.PNG?raw=true" width="400"/>
 
 2. Dark 테마
-<img src="https://github.com/kks2139/Tetris/blob/main/readme_img/maginpage_dark.PNG?raw=true" width="600"/>
-<img src="https://github.com/kks2139/Tetris/blob/main/readme_img/setting_dark.PNG?raw=true" width="600"/>
-<img src="https://github.com/kks2139/Tetris/blob/main/readme_img/play_dark.PNG?raw=true" width="600"/>
+<img src="https://github.com/kks2139/Tetris/blob/main/readme_img/mainpage_dark.PNG?raw=true" width="400"/>
+<img src="https://github.com/kks2139/Tetris/blob/main/readme_img/setting_dark.PNG?raw=true" width="400"/>
+<img src="https://github.com/kks2139/Tetris/blob/main/readme_img/play_dark.PNG?raw=true" width="400"/>
 
 
 
