@@ -21,18 +21,21 @@ export const UT = {
         }
     },
 
-    request : ({url, body = {}}, callback)=>{
+    request : ({url, body = {}, method='POST'}, callback)=>{
         if(!url) return;
-        UT.showLoadMask(true);
-        fetch("/api/" + url, {
-            method: "POST",
+        
+        const option = {
+            method: method,
             credentials: "same-origin",
             headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": document.querySelector('meta[name=_csrf]').content
-            },
-            body: JSON.stringify(body)
-        })
+                "Content-Type" : "application/json",
+                "X-CSRF-TOKEN" : document.querySelector('meta[name=_csrf]').content
+            }
+        }
+        if(method.toLowerCase() === 'post') option.body = JSON.stringify(body);
+        
+        UT.showLoadMask(true);
+        fetch("/api/" + url, option)
         .then(res => {
             UT.showLoadMask(false);
             return res.status === 200 ? res.json() : {}
@@ -41,7 +44,7 @@ export const UT = {
             const result = {
                 errMsg : res.error,
                 result : res.rows,
-                data : res.data
+                data : res.data || res
             }
             if(callback && typeof callback === "function") callback(result);
         })

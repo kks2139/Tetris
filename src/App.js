@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Tetris from './pages/tetris/Tetris';
 import { UT } from './util/util';
@@ -42,6 +42,12 @@ function App() {
     setThemeColor(theme);
   }
 
+  useEffect(()=>{
+    UT.request({url : "getToken", method : "GET"}, (res)=>{
+      document.querySelector('meta[name=_csrf]').content = res.data.token;
+    });
+  }, []);
+
   return (
       <div className="no-drag" style={{height:"100vh"}}>
           <SessionContext.Provider value={{session, onLogout, themeColor, onChangeTheme}}>
@@ -52,4 +58,4 @@ function App() {
   );
 }
 
- export default App;
+export default App;

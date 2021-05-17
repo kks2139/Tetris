@@ -49,8 +49,6 @@ function Login({onClickSignIn, onLogin}){
             if(result.length === 0){
                 UT.alert(`Check User Name or Password again.`);
             }else{
-                const meta = document.querySelector('meta[name=_csrf]');
-                meta.content = data;
                 onLogin(id);
             }
         });

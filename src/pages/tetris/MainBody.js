@@ -402,7 +402,7 @@ function MainBody({size = 10, level = "Easy", onGameOver, keyset = [g_keyset[0],
             ref_over.current.hidden = false;
             setTimeout(()=> ref_over.current.style.opacity = 1, 50);
         }else{
-            if(blockCount !== 0 && blockCount % 25 === 0){
+            if(blockCount !== 0 && blockCount % 30 === 0){
                 ref_acc.current += 100;
             }
             let speed = level === "Easy" ? 1000 - ref_acc.current
