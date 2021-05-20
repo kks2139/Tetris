@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 import Tetris from './pages/tetris/Tetris';
 import { UT } from './util/util';
@@ -11,6 +11,7 @@ function App() {
     login : sessionStorage.getItem("login") || false
   });
   const [themeColor, setThemeColor] = useState("");
+  const isDev = useRef(window.location.href.indexOf('localhost') > -1).current;
 
   const onLoginSuccess = (id)=>{
     sessionStorage.setItem("user_id", id);
@@ -32,12 +33,13 @@ function App() {
   }
 
   const onChangeTheme = (theme)=>{
+    const css1 = isDev ? document.styleSheets[2].rules[11] : document.styleSheets[0].rules[83]; 
     if(theme === "dark"){
       document.querySelector('#root').classList.add(theme);
-      document.styleSheets[2].rules[11].style.backgroundColor = "var(--theme-black2)";
+      css1.style.backgroundColor = "var(--theme-black2)";
     }else{
       document.querySelector('#root').classList.remove("dark");
-      document.styleSheets[2].rules[11].style.backgroundColor = "white";
+      css1.style.backgroundColor = "white";
     }
     setThemeColor(theme);
   }
