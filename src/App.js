@@ -27,6 +27,7 @@ function App() {
       sessionStorage.clear();
       setSession({id : null, login : false});
       setThemeColor("");
+      getToken();
     });
   }
 
@@ -37,15 +38,18 @@ function App() {
     }else{
       document.querySelector('#root').classList.remove("dark");
       document.styleSheets[2].rules[11].style.backgroundColor = "white";
-
     }
     setThemeColor(theme);
   }
 
-  useEffect(()=>{
+  const getToken = ()=>{
     UT.request({url : "getToken", method : "GET"}, (res)=>{
-      document.querySelector('meta[name=_csrf]').content = res.data.token;
+      sessionStorage.setItem('_csrf', res.data.token);
     });
+  }
+
+  useEffect(()=>{
+    getToken();
   }, []);
 
   return (

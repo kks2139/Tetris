@@ -29,7 +29,7 @@ export const UT = {
             credentials: "same-origin",
             headers: {
                 "Content-Type" : "application/json",
-                "X-CSRF-TOKEN" : document.querySelector('meta[name=_csrf]').content
+                "X-CSRF-TOKEN" : sessionStorage.getItem('_csrf')
             }
         }
         if(method.toLowerCase() === 'post') option.body = JSON.stringify(body);
