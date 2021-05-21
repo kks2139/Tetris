@@ -42,7 +42,7 @@
    
 ### 2. 사용 기술
 - UI : HTML / CSS / Javascript / React Hooks   
-- Server : Node Express   
+- Server : Express.js / AWS EC2 / Nginx   
 - DB : AWS RDS / MySQL   
 
 ***
