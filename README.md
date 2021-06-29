@@ -40,7 +40,7 @@
    
 ***
    
-### 2. 사용 기술
+### 2. 개발 
 - UI : React Hooks / HTML / CSS / Javascript   
 - Server & Deployment : ExpressJS / AWS EC2 / Nginx / FTP   
 - DB : AWS RDS / MySQL   
