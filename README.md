@@ -40,7 +40,7 @@
    
 ***
    
-### 2. 개발 
+### 2. 개발 환경
 - UI : React Hooks / HTML / CSS / Javascript   
 - Server & Deployment : ExpressJS / AWS EC2 / Nginx / FTP   
 - DB : AWS RDS / MySQL   
