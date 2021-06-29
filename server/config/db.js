@@ -15,6 +15,11 @@ const sqlMap = {
          where name = ?
            and pw = ? 
     `,
+    checkUser : `
+        select name
+          from user
+         where name = ?
+    `,
     signup : `
         insert into user 
         (
@@ -121,6 +126,8 @@ const doQuery = async (sqlId, p)=>{
      
     switch(sqlId){
         case 'getUser': params = [p.id, p.pw];
+            break;
+        case 'checkUser': params = [p.id];
             break;
         case 'signup': params = [p.id, p.pw];
             break;

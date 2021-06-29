@@ -35,7 +35,7 @@ app.post('/api/login', (req, res)=>{
 });
 
 app.post('/api/signup', (req, res)=>{
-    doQuery('getUser', req.body).then( user =>{
+    doQuery('checkUser', req.body).then( user =>{
         if(user.rows.length > 0){
             res.send({error : "exist"});
         }else{
