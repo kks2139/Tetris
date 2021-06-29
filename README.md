@@ -1,7 +1,7 @@
 # TETRIS - Making my tetris game using react
 리액트로 만들어보는 테트리스 게임 입니다.
 
-[사이트 링크 ()](http://ec2-3-36-219-54.ap-northeast-2.compute.amazonaws.com/)
+[사이트 링크 (클릭)](http://ec2-3-36-219-54.ap-northeast-2.compute.amazonaws.com/)
 
 
 ***
