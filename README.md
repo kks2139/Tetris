@@ -2,7 +2,7 @@
 
 ### 리액트로 만들어보는 테트리스 게임 입니다.
 
-[사이트 링크 (클릭)](http://ec2-3-36-219-54.ap-northeast-2.compute.amazonaws.com/)
+<img src="https://pic.sopili.net/pub/emoji/twitter/2/72x72/1f4cc.png" width=24 height=24> [사이트 링크 (클릭)](http://ec2-3-36-219-54.ap-northeast-2.compute.amazonaws.com/)
 
 ***
    
